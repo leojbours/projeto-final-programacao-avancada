@@ -12,6 +12,7 @@ import java.time.LocalDate;
  */
 public class Animal {
     
+    private Integer codAnimal;
     private String nome;
     private String tipo;
     private LocalDate dataEncontro;
@@ -26,6 +27,10 @@ public class Animal {
         this.cor = cor;
     }
 
+    public Integer getCodAnimal() {
+        return codAnimal;
+    }
+    
     public String getCor() {
         return cor;
     }
@@ -73,7 +78,5 @@ public class Animal {
     public void setIdade(Integer idade) {
         this.idade = idade;
     }
-
-    
     
 }

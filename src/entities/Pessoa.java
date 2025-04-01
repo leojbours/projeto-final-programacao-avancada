@@ -12,6 +12,7 @@ import java.time.LocalDate;
  */
 public class Pessoa {
 
+    private Integer codPessoa;
     private String nomePessoa;
     private String cpf;
     private String passsaporte;
@@ -35,6 +36,10 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
+    public Integer getCodPessoa() {
+        return codPessoa;
+    }
+    
     public String getNomePessoa() {
         return nomePessoa;
     }

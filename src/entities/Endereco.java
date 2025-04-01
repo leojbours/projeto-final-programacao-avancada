@@ -10,6 +10,7 @@ package entities;
  */
 public class Endereco {
     
+    private Integer codEndereco;
     private String logradouro;
     private String numero;
     private String bairro;
@@ -26,6 +27,10 @@ public class Endereco {
         this.pais = pais;
     }
 
+    public Integer getCodEndereco() {
+        return codEndereco;
+    }
+    
     public String getPais() {
         return pais;
     }
