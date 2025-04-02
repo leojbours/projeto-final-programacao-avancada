@@ -20,9 +20,12 @@ public class Pessoa {
     private Character sexo;
     private String numCelular;
     private String estadoCivil;
-    private Endereco endereco;
+    private String logradouro;
+    private String numero;
+    private String bairro;
+    private Cidade cidade; 
 
-    public Pessoa(String nomePessoa, String documento, boolean isCpf, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, Endereco endereco) {
+    public Pessoa(String nomePessoa, String documento, boolean isCpf, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Cidade cidade) {
         this.nomePessoa = nomePessoa;
         if (isCpf){
             this.cpf = documento;
@@ -33,7 +36,10 @@ public class Pessoa {
         this.sexo = sexo;
         this.numCelular = numCelular;
         this.estadoCivil = estadoCivil;
-        this.endereco = endereco;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
     }
 
     public Integer getCodPessoa() {
@@ -96,12 +102,35 @@ public class Pessoa {
         this.estadoCivil = estadoCivil;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 }

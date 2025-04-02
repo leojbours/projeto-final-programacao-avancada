@@ -12,9 +12,11 @@ import java.time.LocalDate;
  */
 public class Adocao {
     
-    Integer codAdocao;
-    Integer codAnimal;
-    LocalDate dataAdocao;
+    private Integer codAdocao;
+    private Integer codAnimal;
+    private LocalDate dataAdocao;
+    private LocalDate dataDevolucao;
+    private String motivoDevolucao;
 
     public Adocao(Integer codAdocao, Integer codAnimal, LocalDate dataAdocao) {
         this.codAdocao = codAdocao;
@@ -45,5 +47,20 @@ public class Adocao {
     public void setDataAdocao(LocalDate dataAdocao) {
         this.dataAdocao = dataAdocao;
     }
-    
+
+    public LocalDate getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(LocalDate dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public String getMotivoDevolucao() {
+        return motivoDevolucao;
+    }
+
+    public void setMotivoDevolucao(String motivoDevolucao) {
+        this.motivoDevolucao = motivoDevolucao;
+    }
 }

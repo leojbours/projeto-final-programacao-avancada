@@ -19,12 +19,14 @@ public class Animal {
     private String raca;
     private Integer idade;
     private String cor;
+    private Character sexo;
 
-    public Animal(String tipo, LocalDate dataEncontro, String raca, String cor) {
+    public Animal(String tipo, LocalDate dataEncontro, String raca, String cor, Character sexo) {
         this.tipo = tipo;
         this.dataEncontro = dataEncontro;
         this.raca = raca;
         this.cor = cor;
+        this.sexo = sexo;
     }
 
     public Integer getCodAnimal() {
@@ -78,5 +80,12 @@ public class Animal {
     public void setIdade(Integer idade) {
         this.idade = idade;
     }
-    
+
+    public Character getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Character sexo) {
+        this.sexo = sexo;
+    }
 }
