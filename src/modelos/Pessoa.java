@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package entities;
+package modelos;
 
 import java.time.LocalDate;
 
@@ -25,6 +25,10 @@ public class Pessoa {
     private String bairro;
     private Cidade cidade; 
 
+    public Pessoa() {
+        
+    }
+    
     public Pessoa(String nomePessoa, String documento, boolean isCpf, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Cidade cidade) {
         this.nomePessoa = nomePessoa;
         if (isCpf){
@@ -42,6 +46,28 @@ public class Pessoa {
         this.cidade = cidade;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Pessoa{");
+        sb.append("codPessoa=").append(codPessoa);
+        sb.append(", nomePessoa=").append(nomePessoa);
+        sb.append(", cpf=").append(cpf);
+        sb.append(", passsaporte=").append(passsaporte);
+        sb.append(", dataNascimento=").append(dataNascimento);
+        sb.append(", sexo=").append(sexo);
+        sb.append(", numCelular=").append(numCelular);
+        sb.append(", estadoCivil=").append(estadoCivil);
+        sb.append(", logradouro=").append(logradouro);
+        sb.append(", numero=").append(numero);
+        sb.append(", bairro=").append(bairro);
+        sb.append(", cidade=").append(cidade);
+        sb.append('}');
+        return sb.toString();
+    }
+    
+    
+    
     public Integer getCodPessoa() {
         return codPessoa;
     }

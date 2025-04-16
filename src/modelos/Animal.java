@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package entities;
+package modelos;
 
 import java.time.LocalDate;
 
@@ -29,6 +29,22 @@ public class Animal {
         this.sexo = sexo;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Animal{");
+        sb.append("codAnimal=").append(codAnimal);
+        sb.append(", nome=").append(nome);
+        sb.append(", tipo=").append(tipo);
+        sb.append(", dataEncontro=").append(dataEncontro);
+        sb.append(", raca=").append(raca);
+        sb.append(", idade=").append(idade);
+        sb.append(", cor=").append(cor);
+        sb.append(", sexo=").append(sexo);
+        sb.append('}');
+        return sb.toString();
+    }
+    
     public Integer getCodAnimal() {
         return codAnimal;
     }

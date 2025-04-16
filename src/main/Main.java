@@ -4,10 +4,15 @@
  */
 package main;
 
+import telas.TelaPrincipal;
+
 /**
  *
  * @author leonardo
  */
 public class Main {
-    
+    public static void main(String[] args) {
+        TelaPrincipal telPrincipal = new TelaPrincipal();
+        telPrincipal.setVisible(true);
+    }
 }

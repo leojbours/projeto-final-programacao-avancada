@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package entities;
+package modelos;
 
 /**
  *
@@ -10,7 +10,7 @@ package entities;
  */
 public class Cidade {
     
-    private Integer codEndereco;
+    private Integer codCidade;
     private String cidade;
     private Character uf;
 
@@ -19,8 +19,19 @@ public class Cidade {
         this.uf = uf;
     }
 
-    public Integer getCodEndereco() {
-        return codEndereco;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cidade{");
+        sb.append("codCidade=").append(codCidade);
+        sb.append(", cidade=").append(cidade);
+        sb.append(", uf=").append(uf);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public Integer getCodCidade() {
+        return codCidade;
     }
 
     public String getCidade() {
