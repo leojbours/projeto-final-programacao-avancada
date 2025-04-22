@@ -28,14 +28,22 @@ public class Pessoa {
     public Pessoa() {
         
     }
-    
-    public Pessoa(String nomePessoa, String documento, boolean isCpf, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Cidade cidade) {
+
+    public Pessoa(Integer codPessoa, String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro) {
+        this.codPessoa = codPessoa;
         this.nomePessoa = nomePessoa;
-        if (isCpf){
-            this.cpf = documento;
-        } else {
-            this.passsaporte = documento;
-        }
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.numCelular = numCelular;
+        this.estadoCivil = estadoCivil;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.bairro = bairro;
+    }
+    
+    public Pessoa(Integer codPessoa, String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Cidade cidade) {
+        this.codPessoa = codPessoa;
+        this.nomePessoa = nomePessoa;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.numCelular = numCelular;
@@ -45,23 +53,23 @@ public class Pessoa {
         this.bairro = bairro;
         this.cidade = cidade;
     }
-
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Pessoa{");
-        sb.append("codPessoa=").append(codPessoa);
-        sb.append(", nomePessoa=").append(nomePessoa);
-        sb.append(", cpf=").append(cpf);
-        sb.append(", passsaporte=").append(passsaporte);
-        sb.append(", dataNascimento=").append(dataNascimento);
-        sb.append(", sexo=").append(sexo);
-        sb.append(", numCelular=").append(numCelular);
-        sb.append(", estadoCivil=").append(estadoCivil);
-        sb.append(", logradouro=").append(logradouro);
-        sb.append(", numero=").append(numero);
-        sb.append(", bairro=").append(bairro);
-        sb.append(", cidade=").append(cidade);
+        sb.append("Pessoa{ \n");
+        sb.append("codPessoa: ").append(codPessoa).append("\n");
+        sb.append("nomePessoa: ").append(nomePessoa).append("\n");
+        sb.append("cpf: ").append(cpf).append("\n");
+        sb.append("passsaporte: ").append(passsaporte).append("\n");
+        sb.append("dataNascimento: ").append(dataNascimento).append("\n");
+        sb.append("sexo: ").append(sexo).append("\n");
+        sb.append("numCelular: ").append(numCelular).append("\n");
+        sb.append("estadoCivil: ").append(estadoCivil).append("\n");
+        sb.append("logradouro: ").append(logradouro).append("\n");
+        sb.append("numero: ").append(numero).append("\n");
+        sb.append("bairro: ").append(bairro).append("\n");
+        sb.append("cidade: ").append(cidade).append("\n");
         sb.append('}');
         return sb.toString();
     }

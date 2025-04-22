@@ -4,12 +4,21 @@
  */
 package telas;
 
+import controladores.ControlaPessoa;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import modelos.Pessoa;
+
 /**
  *
  * @author leonardo.bourscheid
  */
 public class TelaCadastroPessoa extends javax.swing.JInternalFrame {
 
+    static DateTimeFormatter FORMATO_1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    ControlaPessoa controlaPessoa = new ControlaPessoa();
+    
     /**
      * Creates new form TelaPessoa
      */
@@ -45,7 +54,11 @@ public class TelaCadastroPessoa extends javax.swing.JInternalFrame {
         lblBairro = new javax.swing.JLabel();
         txtBairro = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbCidade = new javax.swing.JComboBox<>();
+        btnSalvar = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -107,7 +120,23 @@ public class TelaCadastroPessoa extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Cidade:*");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnSalvar.setText("SALVAR");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("RECUPERAR TUDO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Id provisório:*");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,9 +150,10 @@ public class TelaCadastroPessoa extends javax.swing.JInternalFrame {
                         .addContainerGap(504, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtNomePessoa, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNomePessoa)
+                                .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel1)
                                         .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,32 +165,38 @@ public class TelaCadastroPessoa extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel2)
                                         .addComponent(jLabel5)
                                         .addComponent(txtPassaporte, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtNumeroCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtBairro, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(txtLogradouro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtSexo, javax.swing.GroupLayout.Alignment.LEADING))
-                                            .addComponent(lblLogradouro)))
-                                    .addComponent(lblBairro))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel6)
-                                    .addComponent(lblNumero)
-                                    .addComponent(lblEstadoCivil)
-                                    .addComponent(txtEstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                                    .addComponent(txtNumero)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(txtNumeroCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtBairro, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(txtLogradouro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtSexo, javax.swing.GroupLayout.Alignment.LEADING))
+                                                .addComponent(lblLogradouro)))
+                                        .addComponent(lblBairro))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel6)
+                                        .addComponent(lblNumero)
+                                        .addComponent(lblEstadoCivil)
+                                        .addComponent(txtEstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                                        .addComponent(txtNumero)
+                                        .addComponent(cmbCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnSalvar))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblEstadoCivil)
@@ -209,8 +245,15 @@ public class TelaCadastroPessoa extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(94, Short.MAX_VALUE))
+                    .addComponent(cmbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,15 +283,60 @@ public class TelaCadastroPessoa extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEstadoCivilActionPerformed
 
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        
+        Pessoa pessoa = new Pessoa(Integer.valueOf(txtId.getText()), txtNomePessoa.getText(), 
+                LocalDate.parse(txtDataNascimento.getText(), FORMATO_1), txtSexo.getText().trim().charAt(0), 
+                txtNumeroCelular.getText(), txtEstadoCivil.getText(), txtLogradouro.getText(), txtNumero.getText(), txtBairro.getText());
+        
+        if (txtCpf.getText().trim().equals("") && !txtPassaporte.getText().trim().equals("")) {
+            pessoa.setPasssaporte(txtPassaporte.getText());
+        } else if (!txtCpf.getText().trim().equals("") && txtPassaporte.getText().trim().equals("")) {
+            pessoa.setCpf(txtCpf.getText());
+        } else if (!txtCpf.getText().trim().equals("") && !txtPassaporte.getText().trim().equals("")) {
+            pessoa.setCpf(txtCpf.getText());
+            pessoa.setPasssaporte(txtPassaporte.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "ERRO: pelo menos um dos campos, CPF ou PASSAPORTE, devem ser preenchidos");
+            return;
+        }
+        
+        controlaPessoa.salvar(pessoa);
+        
+        JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+        
+        txtNomePessoa.setText("");
+        txtCpf.setText("");
+        txtPassaporte.setText("");
+        txtDataNascimento.setText("");
+        txtNumeroCelular.setText("");
+        txtSexo.setText("");
+        txtEstadoCivil.setText("");
+        txtLogradouro.setText("");
+        txtNumero.setText("");
+        txtBairro.setText("");
+        txtId.setText("");
+        
+        txtNomePessoa.requestFocus();
+        
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        controlaPessoa.recuperarTudo();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cmbCidade;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblEstadoCivil;
     private javax.swing.JLabel lblLogradouro;
@@ -258,6 +346,7 @@ public class TelaCadastroPessoa extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtDataNascimento;
     private javax.swing.JTextField txtEstadoCivil;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNomePessoa;
     private javax.swing.JTextField txtNumero;

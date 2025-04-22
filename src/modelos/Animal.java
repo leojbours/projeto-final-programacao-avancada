@@ -20,27 +20,40 @@ public class Animal {
     private Integer idade;
     private String cor;
     private Character sexo;
+    private String localDeEncontro;
 
-    public Animal(String tipo, LocalDate dataEncontro, String raca, String cor, Character sexo) {
+    public Animal(Integer codAnimal, String tipo, LocalDate dataEncontro, String raca, String cor, Character sexo, String localDeEncontro) {
+        this.codAnimal = codAnimal;
         this.tipo = tipo;
         this.dataEncontro = dataEncontro;
         this.raca = raca;
         this.cor = cor;
         this.sexo = sexo;
+        this.localDeEncontro = localDeEncontro;
+    }
+    
+    public Animal(String tipo, LocalDate dataEncontro, String raca, String cor, Character sexo, String localDeEncontro) {
+        this.tipo = tipo;
+        this.dataEncontro = dataEncontro;
+        this.raca = raca;
+        this.cor = cor;
+        this.sexo = sexo;
+        this.localDeEncontro = localDeEncontro;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Animal{");
-        sb.append("codAnimal=").append(codAnimal);
-        sb.append(", nome=").append(nome);
-        sb.append(", tipo=").append(tipo);
-        sb.append(", dataEncontro=").append(dataEncontro);
-        sb.append(", raca=").append(raca);
-        sb.append(", idade=").append(idade);
-        sb.append(", cor=").append(cor);
-        sb.append(", sexo=").append(sexo);
+        sb.append("Animal{").append("\n");
+        sb.append("codAnimal: ").append(codAnimal).append("\n");
+        sb.append("nome: ").append(nome).append("\n");
+        sb.append("tipo: ").append(tipo).append("\n");
+        sb.append("dataEncontro: ").append(dataEncontro).append("\n");
+        sb.append("raca: ").append(raca).append("\n");
+        sb.append("idade: ").append(idade).append("\n");
+        sb.append("cor: ").append(cor).append("\n");
+        sb.append("sexo: ").append(sexo).append("\n");
+        sb.append("Local de encontro: ").append(localDeEncontro).append("\n");
         sb.append('}');
         return sb.toString();
     }
@@ -103,5 +116,13 @@ public class Animal {
 
     public void setSexo(Character sexo) {
         this.sexo = sexo;
+    }
+
+    public String getLocalDeEncontro() {
+        return localDeEncontro;
+    }
+
+    public void setLocalDeEncontro(String localDeEncontro) {
+        this.localDeEncontro = localDeEncontro;
     }
 }

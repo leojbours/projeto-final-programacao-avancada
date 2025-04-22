@@ -28,9 +28,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         dskPainel = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        barraMenu = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
         mnuPessoa = new javax.swing.JMenuItem();
+        mnuAnimal = new javax.swing.JMenuItem();
 
         jMenu2.setText("File");
         jMenuBar2.add(jMenu2);
@@ -44,7 +45,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         dskPainel.setLayout(dskPainelLayout);
         dskPainelLayout.setHorizontalGroup(
             dskPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
+            .addGap(0, 743, Short.MAX_VALUE)
         );
         dskPainelLayout.setVerticalGroup(
             dskPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -61,9 +62,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastros.add(mnuPessoa);
 
-        jMenuBar1.add(menuCadastros);
+        mnuAnimal.setText("Animais");
+        mnuAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAnimalActionPerformed(evt);
+            }
+        });
+        menuCadastros.add(mnuAnimal);
 
-        setJMenuBar(jMenuBar1);
+        barraMenu.add(menuCadastros);
+
+        setJMenuBar(barraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,6 +93,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         dskPainel.add(telaPessoa);
         telaPessoa.setVisible(true);
     }//GEN-LAST:event_mnuPessoaActionPerformed
+
+    private void mnuAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAnimalActionPerformed
+        TelaCadastroAnimal telaAnimais = new TelaCadastroAnimal();
+        dskPainel.add(telaAnimais);
+        telaAnimais.setVisible(true);                                       
+    }//GEN-LAST:event_mnuAnimalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,12 +136,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar barraMenu;
     private javax.swing.JDesktopPane dskPainel;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu menuCadastros;
+    private javax.swing.JMenuItem mnuAnimal;
     private javax.swing.JMenuItem mnuPessoa;
     // End of variables declaration//GEN-END:variables
 }
