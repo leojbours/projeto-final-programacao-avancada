@@ -12,22 +12,20 @@ import modelos.Pessoa;
  * @author leonardo.bourscheid
  */
 public class ControlaPessoa {
-    
+
     ArrayList<Pessoa> pessoas = new ArrayList<>();
-    
-    public void salvar(Pessoa pessoa){
-    pessoas.add(pessoa);
+
+    public void salvar(Pessoa pessoa) {
+        pessoas.add(pessoa);
     }
-    
+
     //recuperar
-    
-    public void recuperarTudo() {
-        for (Pessoa pessoa : pessoas) {
-            System.out.println(pessoa.toString());
-        }
-        
-    //editar
+    public ArrayList<Pessoa> recuperarTudo() {
+        return pessoas;
+    }
+
+}
+
+//editar
     
     //deletar
-    }
-}

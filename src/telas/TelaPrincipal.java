@@ -89,15 +89,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnuPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPessoaActionPerformed
-        TelaCadastroPessoa telaPessoa = new TelaCadastroPessoa();
-        dskPainel.add(telaPessoa);
-        telaPessoa.setVisible(true);
+        TelaListagemPessoa telaListagemPessoa = new TelaListagemPessoa();
+        dskPainel.add(telaListagemPessoa);
+        telaListagemPessoa.setVisible(true);
     }//GEN-LAST:event_mnuPessoaActionPerformed
 
     private void mnuAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAnimalActionPerformed
-        TelaCadastroAnimal telaAnimais = new TelaCadastroAnimal();
-        dskPainel.add(telaAnimais);
-        telaAnimais.setVisible(true);                                       
+        TelaListagemAnimal telaListagemAnimal = new TelaListagemAnimal();
+        dskPainel.add(telaListagemAnimal);
+        telaListagemAnimal.setVisible(true);                                       
     }//GEN-LAST:event_mnuAnimalActionPerformed
 
     /**

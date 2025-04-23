@@ -13,6 +13,7 @@ public class Cidade {
     private Integer codCidade;
     private String cidade;
     private Character uf;
+    private String cep;
 
     public Cidade(String cidade, char uf) {
         this.cidade = cidade;
@@ -22,10 +23,10 @@ public class Cidade {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Cidade{");
-        sb.append("codCidade=").append(codCidade);
-        sb.append(", cidade=").append(cidade);
-        sb.append(", uf=").append(uf);
+        sb.append("Cidade{").append("\n");
+        sb.append("codCidade: ").append(codCidade).append("\n");
+        sb.append("cidade: ").append(cidade).append("\n");
+        sb.append("uf: ").append(uf).append("\n");
         sb.append('}');
         return sb.toString();
     }
@@ -48,5 +49,13 @@ public class Cidade {
 
     public void setUf(char uf) {
         this.uf = uf;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 }

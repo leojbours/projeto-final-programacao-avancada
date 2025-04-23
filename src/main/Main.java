@@ -12,7 +12,7 @@ import telas.TelaPrincipal;
  */
 public class Main {
     public static void main(String[] args) {
-        TelaPrincipal telPrincipal = new TelaPrincipal();
-        telPrincipal.setVisible(true);
+        TelaPrincipal telaPrincipal = new TelaPrincipal();
+        telaPrincipal.setVisible(true);
     }
 }

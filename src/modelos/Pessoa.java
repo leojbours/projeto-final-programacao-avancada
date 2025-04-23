@@ -57,6 +57,23 @@ public class Pessoa {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append(codPessoa).append(";");
+        sb.append(nomePessoa).append(";");
+        sb.append(cpf).append(";");
+        sb.append(passsaporte).append(";");
+        sb.append(dataNascimento).append(";");
+        sb.append(sexo).append(";");
+        sb.append(numCelular).append(";");
+        sb.append(estadoCivil).append(";");
+        sb.append(logradouro).append(";");
+        sb.append(numero).append(";");
+        sb.append(bairro).append(";");
+        sb.append(cidade).append(";");
+        return sb.toString();
+    }
+    
+    public String imprimeAtributos() {
+        StringBuilder sb = new StringBuilder();
         sb.append("Pessoa{ \n");
         sb.append("codPessoa: ").append(codPessoa).append("\n");
         sb.append("nomePessoa: ").append(nomePessoa).append("\n");
@@ -74,6 +91,15 @@ public class Pessoa {
         return sb.toString();
     }
     
+    public String getEndereco() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(logradouro).append(", ");
+        sb.append(numero).append(". ");
+        sb.append(bairro).append(". ");
+        sb.append(cidade.getCidade()).append(" - ");
+        sb.append(cidade.getUf());
+        return sb.toString();
+    }
     
     
     public Integer getCodPessoa() {
