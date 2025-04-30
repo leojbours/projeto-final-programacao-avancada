@@ -4,6 +4,8 @@
  */
 package main;
 
+import apoio.ConexaoBD;
+import javax.swing.JOptionPane;
 import telas.TelaPrincipal;
 
 /**
@@ -11,8 +13,17 @@ import telas.TelaPrincipal;
  * @author leonardo
  */
 public class Main {
+
     public static void main(String[] args) {
-        TelaPrincipal telaPrincipal = new TelaPrincipal();
-        telaPrincipal.setVisible(true);
+        try {
+            ConexaoBD.getInstance().getConnection();
+            TelaPrincipal telaPrincipal = new TelaPrincipal();
+            telaPrincipal.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro de conexão com o banco de dados");
+        } finally {
+            ConexaoBD.getInstance().shutdown();
+        }
+
     }
 }

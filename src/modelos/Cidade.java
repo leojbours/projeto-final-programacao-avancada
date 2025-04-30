@@ -11,21 +11,23 @@ package modelos;
 public class Cidade {
     
     private Integer codCidade;
-    private String cidade;
-    private Character uf;
+    private String nomeCidade;
+    private String uf;
     private String cep;
 
-    public Cidade(String cidade, char uf) {
-        this.cidade = cidade;
+    public Cidade(Integer codCidade, String nomeCidade, String uf, String cep) {
+        this.codCidade = codCidade;
+        this.nomeCidade = nomeCidade;
         this.uf = uf;
+        this.cep = cep;
     }
-
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Cidade{").append("\n");
         sb.append("codCidade: ").append(codCidade).append("\n");
-        sb.append("cidade: ").append(cidade).append("\n");
+        sb.append("cidade: ").append(nomeCidade).append("\n");
         sb.append("uf: ").append(uf).append("\n");
         sb.append('}');
         return sb.toString();
@@ -35,19 +37,19 @@ public class Cidade {
         return codCidade;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getNomeCidade() {
+        return nomeCidade;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCidade(String nomeCidade) {
+        this.nomeCidade = nomeCidade;
     }
 
-    public Character getUf() {
+    public String getUf() {
         return uf;
     }
 
-    public void setUf(char uf) {
+    public void setUf(String uf) {
         this.uf = uf;
     }
 

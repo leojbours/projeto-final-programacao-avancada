@@ -6,6 +6,8 @@ package controladores;
 
 import java.util.ArrayList;
 import modelos.Cidade;
+import java.sql.SQLException;
+import modelos.DAO.CidadeDAO;
 
 /**
  *
@@ -13,18 +15,32 @@ import modelos.Cidade;
  */
 public class ControlaCidade {
     
-    ArrayList<Cidade> cidades = new ArrayList<>();
+    CidadeDAO cidadeDAO = new CidadeDAO();
     
-    public void salvar(Cidade cidade) {
-        cidades.add(cidade);
+    public Cidade recuperarCidade(Integer codCidade) {
+        Cidade cidade = null;
+        
+        try{
+           cidade = cidadeDAO.recuperarCidade(codCidade);
+           return cidade;
+        } catch (SQLException e) {
+            System.out.println("Erro ao recuperar do banco: " + e.getMessage());
+        }
+        
+        return cidade;
     }
     
-    //recuperar
-    
-    public void recuperarTudo() {
-        for (Cidade cidade : cidades) {
-            System.out.println(cidade.toString());
+    public ArrayList<Cidade> recuperarTudo() {
+        ArrayList<Cidade> cidades = null;
+        
+        try {
+            cidades = cidadeDAO.recuperaTodos();
+            return cidades;
+        } catch (SQLException e) {
+            System.out.println("Erro ao recuperar do banco: " + e.getMessage());
         }
+        
+        return cidades;
     }
     
     //editar

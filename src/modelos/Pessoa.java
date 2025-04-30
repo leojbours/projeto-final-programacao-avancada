@@ -53,6 +53,21 @@ public class Pessoa {
         this.bairro = bairro;
         this.cidade = cidade;
     }
+
+    public Pessoa(Integer codPessoa, String nomePessoa, String cpf, String passsaporte, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Cidade cidade) {
+        this.codPessoa = codPessoa;
+        this.nomePessoa = nomePessoa;
+        this.cpf = cpf;
+        this.passsaporte = passsaporte;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.numCelular = numCelular;
+        this.estadoCivil = estadoCivil;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+    }
     
     @Override
     public String toString() {
@@ -96,7 +111,7 @@ public class Pessoa {
         sb.append(logradouro).append(", ");
         sb.append(numero).append(". ");
         sb.append(bairro).append(". ");
-        sb.append(cidade.getCidade()).append(" - ");
+        sb.append(cidade.getNomeCidade()).append(" - ");
         sb.append(cidade.getUf());
         return sb.toString();
     }

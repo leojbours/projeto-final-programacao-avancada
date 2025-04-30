@@ -13,17 +13,16 @@ import java.time.LocalDate;
 public class Animal {
     
     private Integer codAnimal;
-    private String nome;
+    private String nome = null;
     private String tipo;
     private LocalDate dataEncontro;
     private String raca;
-    private Integer idade;
+    private Integer idade = null;
     private String cor;
     private Character sexo;
     private String localDeEncontro;
-
-    public Animal(Integer codAnimal, String tipo, LocalDate dataEncontro, String raca, String cor, Character sexo, String localDeEncontro) {
-        this.codAnimal = codAnimal;
+    
+    public Animal(String tipo, LocalDate dataEncontro, String raca, String cor, Character sexo, String localDeEncontro) {
         this.tipo = tipo;
         this.dataEncontro = dataEncontro;
         this.raca = raca;
@@ -31,11 +30,14 @@ public class Animal {
         this.sexo = sexo;
         this.localDeEncontro = localDeEncontro;
     }
-    
-    public Animal(String tipo, LocalDate dataEncontro, String raca, String cor, Character sexo, String localDeEncontro) {
+
+    public Animal(Integer codAnimal, String nome, String tipo, LocalDate dataEncontro, String raca, Integer idade, String cor, Character sexo, String localDeEncontro) {
+        this.codAnimal = codAnimal;
+        this.nome = nome;
         this.tipo = tipo;
         this.dataEncontro = dataEncontro;
         this.raca = raca;
+        this.idade = idade;
         this.cor = cor;
         this.sexo = sexo;
         this.localDeEncontro = localDeEncontro;

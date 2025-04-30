@@ -6,21 +6,37 @@ package controladores;
 
 import java.util.ArrayList;
 import modelos.Pessoa;
+import java.sql.SQLException;
+import modelos.DAO.PessoaDAO;
 
 /**
  *
  * @author leonardo.bourscheid
  */
 public class ControlaPessoa {
+    
+    PessoaDAO pessoaDAO = new PessoaDAO();
 
-    ArrayList<Pessoa> pessoas = new ArrayList<>();
-
-    public void salvar(Pessoa pessoa) {
-        pessoas.add(pessoa);
+    public boolean salvar(Pessoa pessoa) {
+        try {
+            pessoaDAO.salvar(pessoa);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro ao salvar no banco: " + e.getMessage());
+            return false;
+        }
     }
 
     //recuperar
     public ArrayList<Pessoa> recuperarTudo() {
+        ArrayList<Pessoa> pessoas = null;
+        
+        try {
+            pessoas = pessoaDAO.recuperarTodos();
+        } catch (SQLException e) {
+            System.out.println("Erro ao recuperar do banco: " + e.getMessage());
+        }
+        
         return pessoas;
     }
 

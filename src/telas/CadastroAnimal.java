@@ -16,16 +16,18 @@ import modelos.Animal;
  */
 public class CadastroAnimal extends javax.swing.JDialog {
 
-    private static DateTimeFormatter FORMATO_1 = DateTimeFormatter.ofPattern("dd/Mm/yyyy"); 
+    private static DateTimeFormatter FORMATO_1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     ControlaAnimal controlaAnimal;
-    
+    TelaListagemAnimal telaListagemAnimal;
+
     /**
      * Creates new form CadastroAnimal
      */
-    public CadastroAnimal(java.awt.Frame parent, boolean modal, ControlaAnimal ca) {
+    public CadastroAnimal(java.awt.Frame parent, boolean modal, ControlaAnimal ca, TelaListagemAnimal tl) {
         super(parent, modal);
         initComponents();
         this.controlaAnimal = ca;
+        this.telaListagemAnimal = tl;
     }
 
     /**
@@ -239,8 +241,8 @@ public class CadastroAnimal extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
-        Animal animal = new Animal(Integer.valueOf(txtId.getText()), txtTipoAnimal.getText(), LocalDate.parse(txtDataEncontro.getText(), FORMATO_1),
-            txtRaca.getText(), txtCor.getText(), txtSexo.getText().trim().charAt(0), txtLocalDeEncontro.getText());
+        Animal animal = new Animal(txtTipoAnimal.getText(), LocalDate.parse(txtDataEncontro.getText(), FORMATO_1),
+                txtRaca.getText(), txtCor.getText(), txtSexo.getText().trim().charAt(0), txtLocalDeEncontro.getText());
 
         //        private Integer idade;
         //        private String nome;
@@ -252,19 +254,26 @@ public class CadastroAnimal extends javax.swing.JDialog {
             animal.setNome(txtNome.getText());
         }
 
-        controlaAnimal.salvar(animal);
+        boolean deuCerto = controlaAnimal.salvar(animal);
 
-        JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+        if (deuCerto) {
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
-        txtTipoAnimal.setText("");
-        txtDataEncontro.setText("");
-        txtRaca.setText("");
-        txtSexo.setText("");
-        txtCor.setText("");
-        txtLocalDeEncontro.setText("");
-        txtIdade.setText("");
-        txtNome.setText("");
-        txtId.setText("");
+            txtTipoAnimal.setText("");
+            txtDataEncontro.setText("");
+            txtRaca.setText("");
+            txtSexo.setText("");
+            txtCor.setText("");
+            txtLocalDeEncontro.setText("");
+            txtIdade.setText("");
+            txtNome.setText("");
+            txtId.setText("");
+            
+            telaListagemAnimal.montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO! Tente novamente mais tarde:");
+        }
+
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -302,7 +311,7 @@ public class CadastroAnimal extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CadastroAnimal dialog = new CadastroAnimal(new javax.swing.JFrame(), true, null);
+                CadastroAnimal dialog = new CadastroAnimal(new javax.swing.JFrame(), true, null, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
