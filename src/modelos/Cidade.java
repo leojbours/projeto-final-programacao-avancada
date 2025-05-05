@@ -29,6 +29,7 @@ public class Cidade {
         sb.append("codCidade: ").append(codCidade).append("\n");
         sb.append("cidade: ").append(nomeCidade).append("\n");
         sb.append("uf: ").append(uf).append("\n");
+        sb.append("cep: ").append(cep).append("\n");
         sb.append('}');
         return sb.toString();
     }

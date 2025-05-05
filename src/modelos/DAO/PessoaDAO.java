@@ -5,7 +5,6 @@
 package modelos.DAO;
 
 import apoio.ConexaoBD;
-import controladores.ControlaCidade;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import modelos.Pessoa;
@@ -20,7 +19,7 @@ import modelos.Cidade;
 public class PessoaDAO {
 
     ResultSet resultadoQ = null;
-    ControlaCidade controlaCidade = new ControlaCidade();
+    CidadeDAO cidadeDAO = new CidadeDAO();
 
     public void salvar(Pessoa pessoa) throws SQLException {
         String sql = ""
@@ -41,7 +40,7 @@ public class PessoaDAO {
         resultadoQ = ConexaoBD.executeQuery(sql);
 
         while (resultadoQ.next()) {
-            Cidade cidade = controlaCidade.recuperarCidade(resultadoQ.getInt("cod_cidade"));
+            Cidade cidade = cidadeDAO.recuperarCidade(resultadoQ.getInt("cod_cidade"));
             Pessoa pessoa = new Pessoa(resultadoQ.getInt("cod_pessoa"), resultadoQ.getString("nom_pessoa"),
                     resultadoQ.getString("cpf"), resultadoQ.getString("passaporte"),
                     LocalDate.parse(resultadoQ.getString("dat_nascimento")), resultadoQ.getString("sexo").charAt(0),

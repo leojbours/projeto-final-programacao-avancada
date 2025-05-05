@@ -19,14 +19,18 @@ public class CidadeDAO {
     ResultSet resultadoQ = null;
 
     public Cidade recuperarCidade(Integer codCidade) throws SQLException {
+        Cidade cidade = null;
+
         String sql = ""
                 + "SELECT * FROM cidade WHERE cod_cidade = " + codCidade;
 
         resultadoQ = ConexaoBD.executeQuery(sql);
 
-        Cidade cidade = new Cidade(resultadoQ.getInt("cod_cidade"), resultadoQ.getString("nom_cidade"),
-                resultadoQ.getString("uf"), resultadoQ.getString("cep"));
-        
+        while (resultadoQ.next()) {
+            cidade = new Cidade(resultadoQ.getInt("cod_cidade"), resultadoQ.getString("nom_cidade"),
+                    resultadoQ.getString("uf"), resultadoQ.getString("cep"));
+        }
+
         return cidade;
     }
 

@@ -6,7 +6,9 @@ package telas;
 
 import controladores.ControlaPessoa;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import modelos.Pessoa;
 
@@ -40,9 +42,9 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
                         case 1:
                             return "NOME";
                         case 2:
-                            return "CPF";
+                            return "ENDERECO";
                         case 3:
-                            return "ENDEREÇO";
+                            return "CPF";
                         case 4:
                             return "NASCIMENTO";
                         default:
@@ -71,9 +73,9 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
                             case 1:
                                 return pessoa.getNomePessoa();
                             case 2:
-                                return pessoa.getCpf();
-                            case 3:
                                 return pessoa.getEndereco();
+                            case 3:
+                                return pessoa.getCpf();                                
                             case 4:
                                 return pessoa.getDataNascimento();
                         }
@@ -84,8 +86,9 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
                 }
             });
 
-            tblPessoa.getColumnModel().getColumn(0).setMinWidth(80);
+            tblPessoa.getColumnModel().getColumn(0).setMinWidth(65);
             tblPessoa.getColumnModel().getColumn(1).setMinWidth(180);
+            tblPessoa.getColumnModel().getColumn(2).setMinWidth(180);
             tblPessoa.getColumnModel().getColumn(0).setPreferredWidth(80);
             tblPessoa.getColumnModel().getColumn(0).setMaxWidth(20);
         }
@@ -180,10 +183,10 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraActionPerformed
-
-        CadastroPessoa telaCadastroPessoa = new CadastroPessoa(null, true, controlaPessoa);
+        JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
+        CadastroPessoa telaCadastroPessoa = new CadastroPessoa(telaAnterior, true, controlaPessoa, this);
+        telaCadastroPessoa.setLocationRelativeTo(telaAnterior);
         telaCadastroPessoa.setVisible(true);
-
     }//GEN-LAST:event_btnCadastraActionPerformed
 
     private void btnAtualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizaActionPerformed

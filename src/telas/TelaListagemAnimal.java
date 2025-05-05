@@ -6,7 +6,9 @@ package telas;
 
 import controladores.ControlaAnimal;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import modelos.Animal;
 
@@ -25,26 +27,32 @@ public class TelaListagemAnimal extends javax.swing.JInternalFrame {
         initComponents();
         montaTabela();
     }
-
+    
     protected final void montaTabela() {
         ArrayList<Animal> animais = controlaAnimal.recuperarTudo();
         if (animais == null) {
-            JOptionPane.showMessageDialog(this, "Erro, não foi possivel recuperar");
+            JOptionPane.showMessageDialog(this, "Erro, nÃ£o foi possivel recuperar");
         } else {
             tblAnimal.setModel(new AbstractTableModel() {
                 @Override
                 public String getColumnName(int column) {
                     switch (column) {
                         case 0:
-                            return "CÓDIGO";
+                            return "CODIGO";
                         case 1:
                             return "TIPO";
                         case 2:
-                            return "RACA";
+                            return "RAÇA";
                         case 3:
                             return "DATA ENCONTRO";
                         case 4:
                             return "LOCAL ENCONTRO";
+                        case 5:
+                            return "SEXO";
+                        case 6:
+                            return "COR";      
+                        case 7:
+                            return "NOME";
                         default:
                             return "";
                     }
@@ -52,7 +60,7 @@ public class TelaListagemAnimal extends javax.swing.JInternalFrame {
 
                 @Override
                 public int getColumnCount() {
-                    return 5;
+                    return 8;
                 }
 
                 @Override
@@ -62,20 +70,25 @@ public class TelaListagemAnimal extends javax.swing.JInternalFrame {
 
                 @Override
                 public Object getValueAt(int rowIndex, int columnIndex) {
-                    Animal animal = animais.get(rowIndex);
-
-                    if (animal != null) {
+                    Animal animal = animais.get(rowIndex);       
+                    if (animais != null) {
                         switch (columnIndex) {
                             case 0:
                                 return animal.getCodAnimal();
                             case 1:
-                                return animal.getNome();
+                                return animal.getTipo();                                
                             case 2:
-                                return animal.getTipo();
+                                return animal.getRaca();                                
                             case 3:
                                 return animal.getDataEncontro();
                             case 4:
                                 return animal.getLocalDeEncontro();
+                            case 5:
+                                return animal.getSexo();
+                            case 6: 
+                                return animal.getCor();
+                            case 7:
+                                return animal.getNome();
                         }
 
                     }
@@ -85,7 +98,7 @@ public class TelaListagemAnimal extends javax.swing.JInternalFrame {
             });
 
             tblAnimal.getColumnModel().getColumn(0).setMinWidth(80);
-            tblAnimal.getColumnModel().getColumn(1).setMinWidth(180);
+            tblAnimal.getColumnModel().getColumn(1).setMinWidth(80);
             tblAnimal.getColumnModel().getColumn(0).setPreferredWidth(80);
             tblAnimal.getColumnModel().getColumn(0).setMaxWidth(20);
         }
@@ -152,7 +165,9 @@ public class TelaListagemAnimal extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraActionPerformed
-        CadastroAnimal telaCadastroAnimal = new CadastroAnimal(null, true, controlaAnimal, this);
+        JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
+        CadastroAnimal telaCadastroAnimal = new CadastroAnimal(telaAnterior, true, controlaAnimal, this);
+        telaCadastroAnimal.setLocationRelativeTo(telaAnterior);
         telaCadastroAnimal.setVisible(true);
     }//GEN-LAST:event_btnCadastraActionPerformed
 

@@ -38,7 +38,6 @@ public class CadastroAnimal extends javax.swing.JDialog {
     private void initComponents() {
 
         lblCor = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtCor = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -47,7 +46,6 @@ public class CadastroAnimal extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLocalDeEncontro = new javax.swing.JTextArea();
-        txtId = new javax.swing.JTextField();
         lblTipoAnimal = new javax.swing.JLabel();
         txtTipoAnimal = new javax.swing.JTextField();
         lblDataEncontro = new javax.swing.JLabel();
@@ -62,8 +60,6 @@ public class CadastroAnimal extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblCor.setText("Cor:*");
-
-        jLabel3.setText("Id (temporário):");
 
         lblNome.setText("Nome:");
 
@@ -83,12 +79,6 @@ public class CadastroAnimal extends javax.swing.JDialog {
 
         txtLocalDeEncontro.setWrapStyleWord(true);
         jScrollPane1.setViewportView(txtLocalDeEncontro);
-
-        txtId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdActionPerformed(evt);
-            }
-        });
 
         lblTipoAnimal.setText("Tipo animal:*");
 
@@ -136,36 +126,33 @@ public class CadastroAnimal extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addGap(166, 166, 166)
-                            .addComponent(btnRecuperarTodos)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnSalvar))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCor, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTipoAnimal, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTipoAnimal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                                    .addComponent(lblRaca, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtRaca, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCor, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtIdade, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addComponent(lblNome))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblDataEncontro)
-                                .addComponent(txtDataEncontro)
-                                .addComponent(lblSexo)
-                                .addComponent(txtSexo)
-                                .addComponent(jLabel2)
-                                .addComponent(jScrollPane1)))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 294, Short.MAX_VALUE)
+                        .addComponent(btnRecuperarTodos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalvar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtCor, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblTipoAnimal, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtTipoAnimal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                                .addComponent(lblRaca, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtRaca, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblCor, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtIdade, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(lblNome))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblDataEncontro)
+                            .addComponent(txtDataEncontro)
+                            .addComponent(lblSexo)
+                            .addComponent(txtSexo)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -206,11 +193,8 @@ public class CadastroAnimal extends javax.swing.JDialog {
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar)
                     .addComponent(btnRecuperarTodos))
                 .addGap(25, 25, 25))
@@ -222,10 +206,6 @@ public class CadastroAnimal extends javax.swing.JDialog {
     private void txtIdadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdadeActionPerformed
-
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
 
     private void txtTipoAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoAnimalActionPerformed
         // TODO add your handling code here:
@@ -244,8 +224,6 @@ public class CadastroAnimal extends javax.swing.JDialog {
         Animal animal = new Animal(txtTipoAnimal.getText(), LocalDate.parse(txtDataEncontro.getText(), FORMATO_1),
                 txtRaca.getText(), txtCor.getText(), txtSexo.getText().trim().charAt(0), txtLocalDeEncontro.getText());
 
-        //        private Integer idade;
-        //        private String nome;
         if (!txtIdade.getText().trim().equals("")) {
             animal.setIdade(Integer.valueOf(txtIdade.getText()));
         }
@@ -267,7 +245,6 @@ public class CadastroAnimal extends javax.swing.JDialog {
             txtLocalDeEncontro.setText("");
             txtIdade.setText("");
             txtNome.setText("");
-            txtId.setText("");
             
             telaListagemAnimal.montaTabela();
         } else {
@@ -328,7 +305,6 @@ public class CadastroAnimal extends javax.swing.JDialog {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCor;
     private javax.swing.JLabel lblDataEncontro;
@@ -338,7 +314,6 @@ public class CadastroAnimal extends javax.swing.JDialog {
     private javax.swing.JLabel lblTipoAnimal;
     private javax.swing.JTextField txtCor;
     private javax.swing.JTextField txtDataEncontro;
-    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtIdade;
     private javax.swing.JTextArea txtLocalDeEncontro;
     private javax.swing.JTextField txtNome;

@@ -41,7 +41,7 @@ public class AnimalDAO {
             Animal animal = new Animal(resultadoQ.getInt("cod_animal"), resultadoQ.getString("nom_animal"),
                     resultadoQ.getString("tipo_animal"), LocalDate.parse(resultadoQ.getString("dat_encontro")), 
                     resultadoQ.getString("raca"), resultadoQ.getInt("idade"), resultadoQ.getString("cor"),
-                    resultadoQ.toString().charAt(0), resultadoQ.getString("local_encontro"));
+                    resultadoQ.getString("sexo").charAt(0), resultadoQ.getString("local_encontro"));
             animais.add(animal);
         }
         

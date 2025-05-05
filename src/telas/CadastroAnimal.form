@@ -25,40 +25,36 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="txtId" pref="128" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
-                          <Component id="btnRecuperarTodos" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="294" max="32767" attributes="0"/>
+                      <Component id="btnRecuperarTodos" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtCor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblTipoAnimal" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtTipoAnimal" alignment="0" pref="255" max="32767" attributes="0"/>
+                              <Component id="lblRaca" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtRaca" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblCor" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtIdade" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtCor" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblTipoAnimal" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtTipoAnimal" alignment="0" pref="255" max="32767" attributes="0"/>
-                                  <Component id="lblRaca" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtRaca" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblCor" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtIdade" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="lblNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="lblDataEncontro" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtDataEncontro" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblSexo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtSexo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblDataEncontro" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDataEncontro" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lblSexo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSexo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -112,11 +108,8 @@
                       <Component id="txtNome" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
-              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="42" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRecuperarTodos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -129,11 +122,6 @@
     <Component class="javax.swing.JLabel" name="lblCor">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cor:*"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Id (tempor&#xe1;rio):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCor">
@@ -178,11 +166,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="txtId">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblTipoAnimal">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tipo animal:*"/>

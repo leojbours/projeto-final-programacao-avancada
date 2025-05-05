@@ -29,8 +29,7 @@ public class Pessoa {
         
     }
 
-    public Pessoa(Integer codPessoa, String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro) {
-        this.codPessoa = codPessoa;
+    public Pessoa(String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro) {
         this.nomePessoa = nomePessoa;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
@@ -41,8 +40,7 @@ public class Pessoa {
         this.bairro = bairro;
     }
     
-    public Pessoa(Integer codPessoa, String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Cidade cidade) {
-        this.codPessoa = codPessoa;
+    public Pessoa(String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Cidade cidade) {
         this.nomePessoa = nomePessoa;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
@@ -53,6 +51,7 @@ public class Pessoa {
         this.bairro = bairro;
         this.cidade = cidade;
     }
+
 
     public Pessoa(Integer codPessoa, String nomePessoa, String cpf, String passsaporte, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Cidade cidade) {
         this.codPessoa = codPessoa;
@@ -68,6 +67,8 @@ public class Pessoa {
         this.bairro = bairro;
         this.cidade = cidade;
     }
+    
+    
     
     @Override
     public String toString() {
