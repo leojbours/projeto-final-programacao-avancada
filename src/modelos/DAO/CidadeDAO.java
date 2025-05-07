@@ -26,7 +26,7 @@ public class CidadeDAO {
 
         resultadoQ = ConexaoBD.executeQuery(sql);
 
-        while (resultadoQ.next()) {
+       if (resultadoQ.next()) {
             cidade = new Cidade(resultadoQ.getInt("cod_cidade"), resultadoQ.getString("nom_cidade"),
                     resultadoQ.getString("uf"), resultadoQ.getString("cep"));
         }

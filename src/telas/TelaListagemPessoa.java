@@ -75,7 +75,7 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
                             case 2:
                                 return pessoa.getEndereco();
                             case 3:
-                                return pessoa.getCpf();                                
+                                return pessoa.getCpf();
                             case 4:
                                 return pessoa.getDataNascimento();
                         }
@@ -138,6 +138,11 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
         });
 
         btnDeleta.setText("DELETA");
+        btnDeleta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletaActionPerformed(evt);
+            }
+        });
 
         btnEdita.setText("EDITA");
         btnEdita.addActionListener(new java.awt.event.ActionListener() {
@@ -194,8 +199,36 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAtualizaActionPerformed
 
     private void btnEditaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaActionPerformed
-        // TODO add your handling code here:
+
+        String codPessoaString = String.valueOf(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0));
+        Integer codPessoa = Integer.valueOf(codPessoaString);
+        
+        JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
+        CadastroPessoa telaCadastroPessoa = new CadastroPessoa(telaAnterior, true, controlaPessoa, this, codPessoa);
+        telaCadastroPessoa.setLocationRelativeTo(telaAnterior);
+        telaCadastroPessoa.setVisible(true);
+
     }//GEN-LAST:event_btnEditaActionPerformed
+
+    private void btnDeletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletaActionPerformed
+
+        String codPessoaString = String.valueOf(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0));
+        Integer codPessoa = Integer.valueOf(codPessoaString);
+
+        int confirmacao = JOptionPane.showConfirmDialog(this, "TEM CERTEZA QUE DESEJA DELETAR?");
+        System.out.println(confirmacao);
+
+        if (confirmacao == 0) {
+            boolean deuCerto = controlaPessoa.deletar(codPessoa);
+            if (deuCerto) {
+                JOptionPane.showMessageDialog(this, "DELETADO COM SUCESSO");
+                montaTabela();
+            } else {
+                JOptionPane.showMessageDialog(this, "ERRO AO DELETAR");
+            }
+        }
+
+    }//GEN-LAST:event_btnDeletaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

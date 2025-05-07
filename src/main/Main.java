@@ -16,12 +16,15 @@ public class Main {
 
     public static void main(String[] args) {
         try {
+            //Faz conexao com o banco de dados
             ConexaoBD.getInstance().getConnection();
+            //Inicia tela
             TelaPrincipal telaPrincipal = new TelaPrincipal();
             telaPrincipal.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro de conexão com o banco de dados");
         } finally {
+            //Fecha conexao com banco de dados
             ConexaoBD.getInstance().shutdown();
         }
 

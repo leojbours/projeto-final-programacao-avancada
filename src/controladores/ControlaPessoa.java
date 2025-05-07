@@ -26,8 +26,19 @@ public class ControlaPessoa {
             return false;
         }
     }
-
-    //recuperar
+    
+    public Pessoa recuperarPessoa(Integer codPessoa) {
+        Pessoa pessoa = null;
+        
+        try {
+            pessoa = pessoaDAO.recuperarPessoa(codPessoa);
+            return pessoa;
+        } catch (SQLException e) {
+            System.out.println("Erro ao recuperar do banco: " + e.getMessage());
+            return pessoa;
+        }
+    }
+    
     public ArrayList<Pessoa> recuperarTudo() {
         ArrayList<Pessoa> pessoas = null;
         
@@ -40,6 +51,26 @@ public class ControlaPessoa {
         return pessoas;
     }
 
+    public boolean editar(Pessoa pessoa) {
+        try {
+            pessoaDAO.editar(pessoa);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro ao editar: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean deletar(Integer codPessoa) {
+        try {
+            pessoaDAO.deletar(codPessoa);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar: " + e.getMessage());
+            return false;
+        }
+    }
+    
 }
 
 //editar

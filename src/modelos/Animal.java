@@ -22,6 +22,7 @@ public class Animal {
     private Character sexo;
     private String localDeEncontro;
     
+    //Construtor usado para salvar da tela
     public Animal(String tipo, LocalDate dataEncontro, String raca, String cor, Character sexo, String localDeEncontro) {
         this.tipo = tipo;
         this.dataEncontro = dataEncontro;
@@ -31,6 +32,7 @@ public class Animal {
         this.localDeEncontro = localDeEncontro;
     }
 
+    //Construtor para recuperar do banco
     public Animal(Integer codAnimal, String nome, String tipo, LocalDate dataEncontro, String raca, Integer idade, String cor, Character sexo, String localDeEncontro) {
         this.codAnimal = codAnimal;
         this.nome = nome;

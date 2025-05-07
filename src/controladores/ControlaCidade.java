@@ -14,36 +14,35 @@ import modelos.DAO.CidadeDAO;
  * @author leonardo.bourscheid
  */
 public class ControlaCidade {
-    
+
     CidadeDAO cidadeDAO = new CidadeDAO();
-    
+
     public Cidade recuperarCidade(Integer codCidade) {
         Cidade cidade = null;
-        
-        try{
-           cidade = cidadeDAO.recuperarCidade(codCidade);
-           return cidade;
+
+        try {
+            cidade = cidadeDAO.recuperarCidade(codCidade);
+            return cidade;
         } catch (SQLException e) {
             System.out.println("Erro ao recuperar do banco: " + e.getMessage());
+            return cidade;
         }
-        
-        return cidade;
+
     }
-    
+
     public ArrayList<Cidade> recuperarTudo() {
         ArrayList<Cidade> cidades = null;
-        
+
         try {
             cidades = cidadeDAO.recuperaTodos();
             return cidades;
         } catch (SQLException e) {
             System.out.println("Erro ao recuperar do banco: " + e.getMessage());
         }
-        
+
         return cidades;
     }
-    
+
     //editar
-    
     //deletar
 }
