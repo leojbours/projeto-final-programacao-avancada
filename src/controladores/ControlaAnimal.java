@@ -27,8 +27,18 @@ public class ControlaAnimal {
         }
 
     }
-
-    //recuperar
+    
+    public Animal recuperarAnimal(Integer codAnimal) {
+        Animal animal = null;
+        try {
+            animal = animalDAO.recuperarAnimal(codAnimal);
+            return animal;
+        } catch (SQLException e) {
+            System.out.println("Erro ao recuperar do banco: " + e.getMessage());
+            return animal;
+        }
+    }
+    
     public ArrayList<Animal> recuperarTudo() {
         ArrayList<Animal> animais = null;
 
@@ -42,6 +52,24 @@ public class ControlaAnimal {
         return animais;
     }
 
-    //editar
-    //deletar
+    public boolean editar(Animal animal) {
+        try {
+            animalDAO.editar(animal);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro ao editar: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean deletar(Integer codAnimal) {
+        try {
+            animalDAO.deletar(codAnimal);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar: " + e.getMessage());
+            return false;
+        }
+    }
+    
 }

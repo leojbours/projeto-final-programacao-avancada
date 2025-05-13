@@ -225,6 +225,7 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
                 montaTabela();
             } else {
                 JOptionPane.showMessageDialog(this, "ERRO AO DELETAR");
+                montaTabela();
             }
         }
 

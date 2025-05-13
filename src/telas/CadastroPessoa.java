@@ -75,7 +75,6 @@ public class CadastroPessoa extends javax.swing.JDialog {
         btnSalvar = new javax.swing.JButton();
         txtNomePessoa = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         txtCpf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtPassaporte = new javax.swing.JTextField();
@@ -116,13 +115,6 @@ public class CadastroPessoa extends javax.swing.JDialog {
         });
 
         jLabel1.setText("CPF:");
-
-        jButton1.setText("RECUPERAR TUDO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         txtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,10 +207,7 @@ public class CadastroPessoa extends javax.swing.JDialog {
                                     .addComponent(txtEstadoCivil, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                                     .addComponent(txtNumero)
                                     .addComponent(cmbCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSalvar)))
+                            .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(0, 16, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -275,9 +264,7 @@ public class CadastroPessoa extends javax.swing.JDialog {
                     .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar)
-                    .addComponent(jButton1))
+                .addComponent(btnSalvar)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -290,14 +277,14 @@ public class CadastroPessoa extends javax.swing.JDialog {
         
         if (pessoaEditada != null) {
 
-            pessoaEditada.setNomePessoa(txtNomePessoa.getText());
+            pessoaEditada.setNomePessoa(txtNomePessoa.getText().toUpperCase());
             pessoaEditada.setDataNascimento(LocalDate.parse(txtDataNascimento.getText(), FORMATO_1));
-            pessoaEditada.setSexo(txtSexo.getText().trim().charAt(0));
+            pessoaEditada.setSexo(txtSexo.getText().trim().toUpperCase().charAt(0));
             pessoaEditada.setNumCelular(txtNumeroCelular.getText());
-            pessoaEditada.setEstadoCivil(txtEstadoCivil.getText());
-            pessoaEditada.setLogradouro(txtLogradouro.getText());
+            pessoaEditada.setEstadoCivil(txtEstadoCivil.getText().toUpperCase());
+            pessoaEditada.setLogradouro(txtLogradouro.getText().toUpperCase());
             pessoaEditada.setNumero(txtNumero.getText());
-            pessoaEditada.setBairro(txtBairro.getText());
+            pessoaEditada.setBairro(txtBairro.getText().toUpperCase());
             pessoaEditada.setCidade(cidade);
             
             if (txtCpf.getText().trim().equals("") && !txtPassaporte.getText().trim().equals("")) {
@@ -315,36 +302,22 @@ public class CadastroPessoa extends javax.swing.JDialog {
             boolean deuCerto = controlaPessoa.editar(pessoaEditada);
 
             if (deuCerto) {
-                JOptionPane.showMessageDialog(this, "Salvo com sucesso!");
-
-                txtNomePessoa.setText("");
-                txtCpf.setText("");
-                txtPassaporte.setText("");
-                txtDataNascimento.setText("");
-                txtNumeroCelular.setText("");
-                txtSexo.setText("");
-                txtEstadoCivil.setText("");
-                txtLogradouro.setText("");
-                txtNumero.setText("");
-                txtBairro.setText("");
-                cmbCidade.setSelectedIndex(0);
-
-                txtNomePessoa.requestFocus();
-
+                JOptionPane.showMessageDialog(this, "Editado com sucesso!");
                 telaListagemPessoa.montaTabela();
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar, tente novamente: ");
             }
 
         } else {
-            Pessoa pessoa = new Pessoa(txtNomePessoa.getText(),
+            Pessoa pessoa = new Pessoa(txtNomePessoa.getText().toUpperCase(),
                     LocalDate.parse(txtDataNascimento.getText(), FORMATO_1),
-                    txtSexo.getText().trim().charAt(0),
+                    txtSexo.getText().trim().toUpperCase().charAt(0),
                     txtNumeroCelular.getText(),
-                    txtEstadoCivil.getText(),
-                    txtLogradouro.getText(),
+                    txtEstadoCivil.getText().toUpperCase(),
+                    txtLogradouro.getText().toUpperCase(),
                     txtNumero.getText(),
-                    txtBairro.getText(),
+                    txtBairro.getText().toUpperCase(),
                     cidade);
 
             if (txtCpf.getText().trim().equals("") && !txtPassaporte.getText().trim().equals("")) {
@@ -390,10 +363,6 @@ public class CadastroPessoa extends javax.swing.JDialog {
     private void txtNomePessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomePessoaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomePessoaActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        controlaPessoa.recuperarTudo();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
         // TODO add your handling code here:
@@ -460,7 +429,6 @@ public class CadastroPessoa extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cmbCidade;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
