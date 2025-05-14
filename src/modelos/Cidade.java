@@ -10,7 +10,7 @@ package modelos;
  */
 public class Cidade {
     
-    private Integer codCidade;
+    private int codCidade;
     private String nomeCidade;
     private String uf;
     private String cep;

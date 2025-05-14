@@ -109,6 +109,10 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
         btnEdita = new javax.swing.JButton();
 
         setClosable(true);
+        setResizable(true);
+        setMaximumSize(new java.awt.Dimension(2147483647, 507));
+        setMinimumSize(new java.awt.Dimension(655, 507));
+        setPreferredSize(new java.awt.Dimension(655, 507));
 
         tblPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,7 +178,7 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastra)
@@ -200,35 +204,42 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
 
     private void btnEditaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaActionPerformed
 
-        String codPessoaString = String.valueOf(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0));
-        Integer codPessoa = Integer.valueOf(codPessoaString);
-        
-        JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
-        CadastroPessoa telaCadastroPessoa = new CadastroPessoa(telaAnterior, true, controlaPessoa, this, codPessoa);
-        telaCadastroPessoa.setLocationRelativeTo(telaAnterior);
-        telaCadastroPessoa.setVisible(true);
+        if (tblPessoa.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
+        } else {
+            String codPessoaString = String.valueOf(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0));
+            Integer codPessoa = Integer.valueOf(codPessoaString);
+
+            JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
+            CadastroPessoa telaCadastroPessoa = new CadastroPessoa(telaAnterior, true, controlaPessoa, this, codPessoa);
+            telaCadastroPessoa.setLocationRelativeTo(telaAnterior);
+            telaCadastroPessoa.setVisible(true);
+        }
 
     }//GEN-LAST:event_btnEditaActionPerformed
 
     private void btnDeletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletaActionPerformed
 
-        String codPessoaString = String.valueOf(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0));
-        Integer codPessoa = Integer.valueOf(codPessoaString);
+        if (tblPessoa.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
+        } else {
+            String codPessoaString = String.valueOf(tblPessoa.getValueAt(tblPessoa.getSelectedRow(), 0));
+            Integer codPessoa = Integer.valueOf(codPessoaString);
 
-        int confirmacao = JOptionPane.showConfirmDialog(this, "TEM CERTEZA QUE DESEJA DELETAR?");
-        System.out.println(confirmacao);
+            int confirmacao = JOptionPane.showConfirmDialog(this, "TEM CERTEZA QUE DESEJA DELETAR?");
+            System.out.println(confirmacao);
 
-        if (confirmacao == 0) {
-            boolean deuCerto = controlaPessoa.deletar(codPessoa);
-            if (deuCerto) {
-                JOptionPane.showMessageDialog(this, "DELETADO COM SUCESSO");
-                montaTabela();
-            } else {
-                JOptionPane.showMessageDialog(this, "ERRO AO DELETAR");
-                montaTabela();
+            if (confirmacao == 0) {
+                boolean deuCerto = controlaPessoa.deletar(codPessoa);
+                if (deuCerto) {
+                    JOptionPane.showMessageDialog(this, "DELETADO COM SUCESSO");
+                    montaTabela();
+                } else {
+                    JOptionPane.showMessageDialog(this, "ERRO AO DELETAR");
+                    montaTabela();
+                }
             }
         }
-
     }//GEN-LAST:event_btnDeletaActionPerformed
 
 

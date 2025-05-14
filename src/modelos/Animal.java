@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class Animal {
     
-    private Integer codAnimal;
+    private int codAnimal;
     private String nome = null;
     private String tipo;
     private LocalDate dataEncontro;

@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class Pessoa {
 
-    private Integer codPessoa;
+    private int codPessoa;
     private String nomePessoa;
     private String cpf;
     private String passsaporte;

@@ -12,8 +12,8 @@ import java.time.LocalDate;
  */
 public class Adocao {
     
-    private Integer codAdocao;
-    private Integer codAnimal;
+    private int codAdocao;
+    private int codAnimal;
     private LocalDate dataAdocao;
     private LocalDate dataDevolucao;
     private String motivoDevolucao;
