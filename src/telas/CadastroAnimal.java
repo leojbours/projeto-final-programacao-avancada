@@ -46,8 +46,14 @@ public class CadastroAnimal extends javax.swing.JDialog {
         txtSexo.setText(animalEditado.getSexo().toString());
         txtCor.setText(animalEditado.getCor());
         txtLocalDeEncontro.setText(animalEditado.getLocalDeEncontro());
-        txtIdade.setText(String.valueOf(animalEditado.getIdade()));
-        txtNome.setText(animalEditado.getNome());
+
+        if (animalEditado.getIdade() != 0) {
+            txtIdade.setText(String.valueOf(animalEditado.getIdade()));
+        }
+
+        if (!animalEditado.getNome().equals("null")) {
+            txtNome.setText(animalEditado.getNome());
+        }
     }
 
     /**
@@ -259,11 +265,11 @@ public class CadastroAnimal extends javax.swing.JDialog {
             }
 
         } else {
-            Animal animal = new Animal(txtTipoAnimal.getText().toUpperCase(), 
+            Animal animal = new Animal(txtTipoAnimal.getText().toUpperCase(),
                     LocalDate.parse(txtDataEncontro.getText(), FORMATO_1),
-                    txtRaca.getText().toUpperCase(), 
-                    txtCor.getText().toUpperCase(), 
-                    txtSexo.getText().trim().toUpperCase().charAt(0), 
+                    txtRaca.getText().toUpperCase(),
+                    txtCor.getText().toUpperCase(),
+                    txtSexo.getText().trim().toUpperCase().charAt(0),
                     txtLocalDeEncontro.getText().trim().toUpperCase());
 
             if (!txtIdade.getText().trim().equals("")) {
