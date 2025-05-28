@@ -23,6 +23,8 @@ public class Pessoa {
     private String logradouro;
     private String numero;
     private String bairro;
+    
+    private Endereco endereco;
     private Cidade cidade; 
 
     public Pessoa() {
