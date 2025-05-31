@@ -25,26 +25,21 @@ public class Pessoa {
     private String bairro;
     
     private Endereco endereco;
-    private Cidade cidade; 
+    private Cidade cidade;
 
-    public Pessoa() {
-        
-    }
 
-    public Pessoa(String nomePessoa, String cpf, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Endereco endereco, Cidade cidade) {
+    public Pessoa(int codPessoa, String nomePessoa, String cpf, String passsaporte, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, Endereco endereco) {
+        this.codPessoa = codPessoa;
         this.nomePessoa = nomePessoa;
         this.cpf = cpf;
+        this.passsaporte = passsaporte;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.numCelular = numCelular;
         this.estadoCivil = estadoCivil;
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.bairro = bairro;
         this.endereco = endereco;
-        this.cidade = cidade;
     }
-    
+
     public Pessoa(String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro) {
         this.nomePessoa = nomePessoa;
         this.dataNascimento = dataNascimento;
@@ -123,15 +118,15 @@ public class Pessoa {
         return sb.toString();
     }
     
-    public String getEndereco() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(logradouro).append(", ");
-        sb.append(numero).append(". ");
-        sb.append(bairro).append(". ");
-        sb.append(cidade.getNomeCidade()).append(" - ");
-        sb.append(cidade.getUf());
-        return sb.toString();
-    }
+//    public String getEndereco() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(logradouro).append(", ");
+//        sb.append(numero).append(". ");
+//        sb.append(bairro).append(". ");
+//        sb.append(cidade.getNomeCidade()).append(" - ");
+//        sb.append(cidade.getUf());
+//        return sb.toString();
+//    }
     
     
     public Integer getCodPessoa() {
@@ -216,6 +211,14 @@ public class Pessoa {
 
     public void setBairro(String bairro) {
         this.bairro = bairro;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public Cidade getCidade() {

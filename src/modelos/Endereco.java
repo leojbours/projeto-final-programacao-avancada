@@ -10,23 +10,36 @@ package modelos;
  */
 public class Endereco {
     
-    private int idEndereco;
+    private int codEndereco;
     private String cep;
     private String logradouro;
+    public String numero;
     private String complemento;
     private String bairro;
 
+    Cidade cidade;
+
+    public Endereco(int codEndereco, String cep, String logradouro, String numero, String complemento, String bairro, Cidade cidade) {
+        this.codEndereco = codEndereco;
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cidade = cidade;
+    }
+
     @Override
     public String toString() {
-        return "Endereco{" + "idEndereco=" + idEndereco + ", cep=" + cep + ", logradouro=" + logradouro + ", complemento=" + complemento + ", bairro=" + bairro + '}';
+        return "Endereco{" + "idEndereco=" + codEndereco + ", cep=" + cep + ", logradouro=" + logradouro + ", complemento=" + complemento + ", bairro=" + bairro + '}';
     }
 
-    public int getIdEndereco() {
-        return idEndereco;
+    public int getCodEndereco() {
+        return codEndereco;
     }
 
-    public void setIdEndereco(int idEndereco) {
-        this.idEndereco = idEndereco;
+    public void setCodEndereco(int codEndereco) {
+        this.codEndereco = codEndereco;
     }
 
     public String getCep() {
@@ -45,6 +58,14 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
     public String getComplemento() {
         return complemento;
     }
@@ -60,5 +81,12 @@ public class Endereco {
     public void setBairro(String bairro) {
         this.bairro = bairro;
     }
-    
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 }

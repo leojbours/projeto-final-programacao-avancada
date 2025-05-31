@@ -34,6 +34,9 @@ public class CadastroPessoa extends javax.swing.JDialog {
     TelaListagemPessoa telaListagemPessoa;
     Pessoa pessoaEditada = null;
     ControlaCidade controlaCidade = new ControlaCidade();
+    Endereco endereco;
+    Cidade cidade;
+
     Gson gson = new Gson();
 
     /**
@@ -442,7 +445,7 @@ public class CadastroPessoa extends javax.swing.JDialog {
 
         String response = ConsomeAPI.obterDados(enderecoAPI);
 
-        Cidade cidade = gson.fromJson(response, Cidade.class);
+        cidade = gson.fromJson(response, Cidade.class);
 
         controlaCidade.salvar(cidade);
         new CombosDAO().popularCombo("cidade", cmbCidade);
@@ -456,9 +459,7 @@ public class CadastroPessoa extends javax.swing.JDialog {
 //
 //        }
 
-        System.out.println("Respota API" + response);
-
-        Endereco endereco = gson.fromJson(response, Endereco.class);
+        endereco = gson.fromJson(response, Endereco.class);
 
         txtLogradouro.setText(endereco.getLogradouro());
         txtBairro.setText(endereco.getBairro());

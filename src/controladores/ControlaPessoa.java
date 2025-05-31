@@ -5,6 +5,8 @@
 package controladores;
 
 import java.util.ArrayList;
+
+import modelos.DAO.EnderecoDAO;
 import modelos.Pessoa;
 import java.sql.SQLException;
 import modelos.DAO.PessoaDAO;

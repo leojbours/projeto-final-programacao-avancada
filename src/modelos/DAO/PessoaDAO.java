@@ -7,6 +7,8 @@ package modelos.DAO;
 import apoio.ConexaoBD;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import modelos.Endereco;
 import modelos.Pessoa;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -19,12 +21,14 @@ import modelos.Cidade;
 public class PessoaDAO {
 
     ResultSet resultadoQ = null;
+    EnderecoDAO enderecoDAO = new EnderecoDAO();
     CidadeDAO cidadeDAO = new CidadeDAO();
 
     public void salvar(Pessoa pessoa) throws SQLException {
+
         String sql = ""
-                + "INSERT INTO pessoa (cod_cidade, nom_pessoa, cpf, passaporte, dat_nascimento, sexo, num_celular, estado_civil, logradouro, numero, bairro, ativo) VALUES ("
-                + pessoa.getCidade().getCodCidade() + ", '"
+                + "INSERT INTO pessoa (cod_endereco, nom_pessoa, cpf, passaporte, dat_nascimento, sexo, num_celular, estado_civil, logradouro, numero, bairro, ativo) VALUES ("
+                + pessoa.getEndereco().getCodEndereco() + ", '"
                 + pessoa.getNomePessoa() + "', '"
                 + pessoa.getCpf() + "', '"
                 + pessoa.getPasssaporte() + "', '"
@@ -32,9 +36,7 @@ public class PessoaDAO {
                 + pessoa.getSexo() + "', '"
                 + pessoa.getNumCelular() + "', '"
                 + pessoa.getEstadoCivil() + "', '"
-                + pessoa.getLogradouro() + "', '"
-                + pessoa.getNumero() + "', '"
-                + pessoa.getBairro() + "', TRUE)";
+                + "TRUE)";
 
         ConexaoBD.executeUpdate(sql);
     }
@@ -47,7 +49,7 @@ public class PessoaDAO {
         resultadoQ = ConexaoBD.executeQuery(sql);
 
         if (resultadoQ.next()) {
-            Cidade cidade = cidadeDAO.recuperarCidade(resultadoQ.getInt("cod_cidade"));
+            Endereco endereco = enderecoDAO.recuperarEndereco(resultadoQ.getInt("cod_endereco"));
             pessoa = new Pessoa(resultadoQ.getInt("cod_pessoa"),
                     resultadoQ.getString("nom_pessoa"),
                     resultadoQ.getString("cpf"),
@@ -56,10 +58,7 @@ public class PessoaDAO {
                     resultadoQ.getString("sexo").charAt(0),
                     resultadoQ.getString("num_celular"),
                     resultadoQ.getString("estado_civil"),
-                    resultadoQ.getString("logradouro"),
-                    resultadoQ.getString("numero"),
-                    resultadoQ.getString("bairro"),
-                    cidade);
+                    endereco);
         }
 
         return pessoa;
@@ -75,13 +74,18 @@ public class PessoaDAO {
 
         while (resultadoQ.next()) {
             if (resultadoQ.getBoolean("ativo")) {
-                Cidade cidade = cidadeDAO.recuperarCidade(resultadoQ.getInt("cod_cidade"));
-                Pessoa pessoa = new Pessoa(resultadoQ.getInt("cod_pessoa"), resultadoQ.getString("nom_pessoa"),
-                        resultadoQ.getString("cpf"), resultadoQ.getString("passaporte"),
-                        LocalDate.parse(resultadoQ.getString("dat_nascimento")), resultadoQ.getString("sexo").charAt(0),
-                        resultadoQ.getString("num_celular"), resultadoQ.getString("estado_civil"),
-                        resultadoQ.getString("logradouro"), resultadoQ.getString("numero"),
-                        resultadoQ.getString("bairro"), cidade);
+                Endereco endereco = enderecoDAO.recuperarEndereco(resultadoQ.getInt("cod_endereco"));
+
+                Pessoa pessoa = new Pessoa(resultadoQ.getInt("cod_pessoa"),
+                        resultadoQ.getString("nom_pessoa"),
+                        resultadoQ.getString("cpf"),
+                        resultadoQ.getString("passaporte"),
+                        LocalDate.parse(resultadoQ.getString("dat_nascimento")),
+                        resultadoQ.getString("sexo").charAt(0),
+                        resultadoQ.getString("num_celular"),
+                        resultadoQ.getString("estado_civil"),
+                        endereco);
+
                 pessoas.add(pessoa);
             }
         }
@@ -91,17 +95,17 @@ public class PessoaDAO {
 
     public void editar(Pessoa pessoa) throws SQLException {
 
-        String sql = "UPDATE pessoa SET"
-                + " cod_cidade = " + pessoa.getCidade().getCodCidade() + ", "
+        Endereco endereco = pessoa.getEndereco();
+
+        enderecoDAO.editar(endereco);
+
+        String sql = "UPDATE pessoa SET "
                 + "nom_pessoa = '" + pessoa.getNomePessoa() + "', "
                 + "cpf = '" + pessoa.getCpf() + "', "
                 + "dat_nascimento = '" + pessoa.getDataNascimento() + "', "
                 + "sexo = '" + pessoa.getSexo() + "', "
                 + "num_celular = '" + pessoa.getNumCelular() + "', "
                 + "estado_civil = '" + pessoa.getEstadoCivil() + "', "
-                + "logradouro = '" + pessoa.getLogradouro() + "', "
-                + "numero = '" + pessoa.getNumero() + "', "
-                + "bairro = '" + pessoa.getBairro() + "' "
                 + "WHERE cod_pessoa = " + pessoa.getCodPessoa();
                 
         ConexaoBD.executeUpdate(sql);
