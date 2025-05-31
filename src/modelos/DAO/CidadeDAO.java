@@ -1,3 +1,6 @@
+
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -18,6 +21,15 @@ public class CidadeDAO {
 
     ResultSet resultadoQ = null;
 
+    public void salvar(Cidade cidade) throws SQLException {
+        String sql = ""
+                + "INSERT INTO CIDADE (nom_cidade, uf) values ('"
+                + cidade.getNomeCidade().toUpperCase() + "', '" 
+                + cidade.getUf().toUpperCase() + "')";
+        
+        ConexaoBD.executeQuery(sql);
+    }
+    
     public Cidade recuperarCidade(Integer codCidade) throws SQLException {
         Cidade cidade = null;
 
@@ -28,7 +40,7 @@ public class CidadeDAO {
 
        if (resultadoQ.next()) {
             cidade = new Cidade(resultadoQ.getInt("cod_cidade"), resultadoQ.getString("nom_cidade"),
-                    resultadoQ.getString("uf"), resultadoQ.getString("cep"));
+                    resultadoQ.getString("uf"));
         }
 
         return cidade;
@@ -44,7 +56,7 @@ public class CidadeDAO {
 
         while (resultadoQ.next()) {
             Cidade cidade = new Cidade(resultadoQ.getInt("cod_cidade"), resultadoQ.getString("nom_cidade"),
-                    resultadoQ.getString("uf"), resultadoQ.getString("cep"));
+                    resultadoQ.getString("uf"));
 
             cidades.add(cidade);
         }

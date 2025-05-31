@@ -16,24 +16,25 @@ import java.net.http.HttpResponse;
  */
 public class ConsomeAPI {
 
-    public static HttpResponse ConsumirAPI(URI endereco) {
+    public static String obterDados(String endereco) {
 
-        HttpResponse response = null;
-        
         try {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(endereco)
+                .uri(URI.create(endereco))
                 .build();
         
-        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client
+                .send(request, HttpResponse.BodyHandlers.ofString());
+        
+        return response.body();
         } catch (IOException | InterruptedException e) {
             System.out.println("Erro ao consumir API:");
             e.printStackTrace();
+            return null;
         }
         
-        return response;
     }
 
 }

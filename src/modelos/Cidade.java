@@ -4,24 +4,25 @@
  */
 package modelos;
 
+import java.util.Objects;
+
 /**
  *
  * @author leonardo
  */
 public class Cidade {
-    
+
     private int codCidade;
+    @com.google.gson.annotations.SerializedName("localidade")
     private String nomeCidade;
     private String uf;
-    private String cep;
 
-    public Cidade(Integer codCidade, String nomeCidade, String uf, String cep) {
+    public Cidade(Integer codCidade, String nomeCidade, String uf) {
         this.codCidade = codCidade;
         this.nomeCidade = nomeCidade;
         this.uf = uf;
-        this.cep = cep;
     }
-    
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -29,7 +30,6 @@ public class Cidade {
         sb.append("codCidade: ").append(codCidade).append("\n");
         sb.append("cidade: ").append(nomeCidade).append("\n");
         sb.append("uf: ").append(uf).append("\n");
-        sb.append("cep: ").append(cep).append("\n");
         sb.append('}');
         return sb.toString();
     }
@@ -54,11 +54,31 @@ public class Cidade {
         this.uf = uf;
     }
 
-    public String getCep() {
-        return cep;
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.nomeCidade);
+        hash = 83 * hash + Objects.hashCode(this.uf);
+        return hash;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cidade other = (Cidade) obj;
+        if (!Objects.equals(this.nomeCidade, other.nomeCidade)) {
+            return false;
+        }
+        return Objects.equals(this.uf, other.uf);
     }
+
+    
 }

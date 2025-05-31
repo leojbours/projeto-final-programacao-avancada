@@ -7,6 +7,7 @@ package controladores;
 import java.util.ArrayList;
 import modelos.Cidade;
 import java.sql.SQLException;
+import java.util.List;
 import modelos.DAO.CidadeDAO;
 
 /**
@@ -16,6 +17,35 @@ import modelos.DAO.CidadeDAO;
 public class ControlaCidade {
 
     CidadeDAO cidadeDAO = new CidadeDAO();
+
+    public boolean salvar(Cidade cidade) {
+
+        try {
+
+            ArrayList<Cidade> cidades = recuperarTudo();
+
+            boolean existe = false;
+            
+            for (Cidade c : cidades) {
+
+                if ((cidade.getNomeCidade().toUpperCase().equals(c.getNomeCidade()) && cidade.getUf().toUpperCase().equals(c.getUf()))) {
+                    existe = true;
+                    break;
+                }
+
+            }
+
+            if (!existe) {
+                cidadeDAO.salvar(cidade);
+            }
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro ao salvar no banco: " + e.getMessage());
+            return false;
+        }
+
+    }
 
     public Cidade recuperarCidade(Integer codCidade) {
         Cidade cidade = null;

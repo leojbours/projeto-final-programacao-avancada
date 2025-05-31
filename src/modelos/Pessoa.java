@@ -31,6 +31,20 @@ public class Pessoa {
         
     }
 
+    public Pessoa(String nomePessoa, String cpf, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Endereco endereco, Cidade cidade) {
+        this.nomePessoa = nomePessoa;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.numCelular = numCelular;
+        this.estadoCivil = estadoCivil;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.endereco = endereco;
+        this.cidade = cidade;
+    }
+    
     public Pessoa(String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro) {
         this.nomePessoa = nomePessoa;
         this.dataNascimento = dataNascimento;
