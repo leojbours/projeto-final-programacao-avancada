@@ -44,7 +44,7 @@ public class EnderecoDAO {
                     "SELECT * FROM endereco " +
                     "WHERE logradouro = '" + endereco.getLogradouro().toUpperCase() +
                     "' AND numero = '" + endereco.getNumero().toUpperCase() +
-                    "' AND complmento = null" +
+                    "' AND complemento = 'null'" +
                     "  AND bairro = '" + endereco.getBairro().toUpperCase() +
                     "' AND cep = '" + endereco.getCep() + "'";
         } else {
@@ -61,7 +61,7 @@ public class EnderecoDAO {
 
         if (resultadoQ.next()) {
             Cidade cidade = cidadeDAO.recuperarCidade(resultadoQ.getInt("cod_cidade"));
-            endereco = new Endereco(
+            enderecoRecuperado = new Endereco(
                     resultadoQ.getInt("cod_endereco"),
                     resultadoQ.getString("cep"),
                     resultadoQ.getString("logradouro"),

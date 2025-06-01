@@ -33,11 +33,11 @@ public class ControlaEndereco {
         Endereco enderecoRecuperado = null;
 
         try {
-            endereco = enderecoDAO.recuperarEndereco(endereco);
-            return endereco;
+            enderecoRecuperado = enderecoDAO.recuperarEndereco(endereco);
+            return enderecoRecuperado;
         } catch (SQLException e) {
             System.out.println("Erro ao recuperar endereço: " + e.getMessage());
-            return endereco;
+            return enderecoRecuperado;
         }
 
     }

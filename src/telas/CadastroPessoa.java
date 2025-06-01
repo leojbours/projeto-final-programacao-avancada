@@ -397,8 +397,6 @@ public class CadastroPessoa extends javax.swing.JDialog {
 
             endereco = controlaEndereco.recuperarEndereco(endereco);
 
-            System.out.println(endereco);
-
             if (!txtComplemento.getText().isEmpty()) {
                 endereco.setComplemento(txtComplemento.getText().toUpperCase());
             }
