@@ -41,8 +41,22 @@ public class ControlaCidade {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("Erro ao salvar no banco: " + e.getMessage());
+            System.out.println("Erro ao salvar no banco: ");
+            e.printStackTrace();
             return false;
+        }
+
+    }
+
+    public Cidade recuperarCidade(String nome, String uf) {
+        Cidade cidade = null;
+
+        try {
+            cidade = cidadeDAO.recuperarCidade(nome, uf);
+            return cidade;
+        } catch (SQLException e) {
+            System.out.println("Erro ao recuperar do banco: " + e.getMessage());
+            return cidade;
         }
 
     }

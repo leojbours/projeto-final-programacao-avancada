@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
  * @author bours
  */
 public class EnderecoDAO {
@@ -21,13 +20,10 @@ public class EnderecoDAO {
     ResultSet resultadoQ = null;
     CidadeDAO cidadeDAO = new CidadeDAO();
 
-    public void salvar(Pessoa pessoa) throws SQLException {
-
-        Endereco endereco = pessoa.getEndereco();
+    public void salvar(Endereco endereco) throws SQLException {
 
         String sql = ""
-                + "INSERT INTO endereco (cod_pessoa, cod_cidade, logradouro, numero, bairro, complemento, cep) VALUES ("
-                + pessoa.getCodPessoa() + ", '"
+                + "INSERT INTO endereco (cod_cidade, logradouro, numero, bairro, complemento, cep) VALUES ("
                 + endereco.getCidade().getCodCidade() + ", '"
                 + endereco.getLogradouro() + "', '"
                 + endereco.getNumero() + "', '"
@@ -38,10 +34,28 @@ public class EnderecoDAO {
         ConexaoBD.executeUpdate(sql);
     }
 
-    public Endereco recuperarEndereco(Integer codEndereco) throws SQLException {
-        Endereco endereco = null;
+    public Endereco recuperarEndereco(Endereco endereco) throws SQLException {
+        Endereco enderecoRecuperado = null;
 
-        String sql = "SELECT * FROM pessoa WHERE cod_pessoa = " + codEndereco;
+        String sql;
+
+        if (endereco.getComplemento() == null) {
+            sql = "" +
+                    "SELECT * FROM endereco " +
+                    "WHERE logradouro = '" + endereco.getLogradouro().toUpperCase() +
+                    "' AND numero = '" + endereco.getNumero().toUpperCase() +
+                    "' AND complmento = null" +
+                    "  AND bairro = '" + endereco.getBairro().toUpperCase() +
+                    "' AND cep = '" + endereco.getCep() + "'";
+        } else {
+            sql = "" +
+                    "SELECT * FROM endereco " +
+                    "WHERE logradouro = '" + endereco.getLogradouro().toUpperCase() +
+                    "' AND numero = '" + endereco.getNumero().toUpperCase() +
+                    "' AND bairro = '" + endereco.getBairro().toUpperCase() +
+                    "' AND complemento = '" + endereco.getComplemento().toUpperCase() +
+                    "' AND cep = '" + endereco.getCep() + "'";
+        }
 
         resultadoQ = ConexaoBD.executeQuery(sql);
 
@@ -49,11 +63,33 @@ public class EnderecoDAO {
             Cidade cidade = cidadeDAO.recuperarCidade(resultadoQ.getInt("cod_cidade"));
             endereco = new Endereco(
                     resultadoQ.getInt("cod_endereco"),
+                    resultadoQ.getString("cep"),
                     resultadoQ.getString("logradouro"),
                     resultadoQ.getString("numero"),
-                    resultadoQ.getString("bairro"),
                     resultadoQ.getString("complemento"),
+                    resultadoQ.getString("bairro"),
+                    cidade);
+        }
+
+        return enderecoRecuperado;
+    }
+
+    public Endereco recuperarEndereco(Integer codEndereco) throws SQLException {
+        Endereco endereco = null;
+
+        String sql = "SELECT * FROM endereco WHERE cod_endereco = " + codEndereco;
+
+        resultadoQ = ConexaoBD.executeQuery(sql);
+
+        if (resultadoQ.next()) {
+            Cidade cidade = cidadeDAO.recuperarCidade(resultadoQ.getInt("cod_cidade"));
+            endereco = new Endereco(
+                    resultadoQ.getInt("cod_endereco"),
                     resultadoQ.getString("cep"),
+                    resultadoQ.getString("logradouro"),
+                    resultadoQ.getString("numero"),
+                    resultadoQ.getString("complemento"),
+                    resultadoQ.getString("bairro"),
                     cidade);
         }
 

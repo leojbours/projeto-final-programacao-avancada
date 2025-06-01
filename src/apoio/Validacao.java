@@ -17,9 +17,9 @@ public class Validacao {
          if (cadastroPessoa.getTxtCpf().getText().trim().equals("") && !cadastroPessoa.getTxtPassaporte().getText().trim().equals("")) {
                 pessoa.setPasssaporte(cadastroPessoa.getTxtPassaporte().getText());
             } else if (!cadastroPessoa.getTxtCpf().getText().trim().equals("") && cadastroPessoa.getTxtPassaporte().getText().trim().equals("")) {
-                pessoa.setCpf(cadastroPessoa.getTxtCpf().getText());
+                pessoa.setCpf(Formatacao.removerFormatacao(cadastroPessoa.getTxtCpf().getText()));
             } else if (!cadastroPessoa.getTxtCpf().getText().trim().equals("") && !cadastroPessoa.getTxtPassaporte().getText().trim().equals("")) {
-                pessoa.setCpf(cadastroPessoa.getTxtCpf().getText());
+                pessoa.setCpf(Formatacao.removerFormatacao(cadastroPessoa.getTxtCpf().getText()));
                 pessoa.setPasssaporte(cadastroPessoa.getTxtPassaporte().getText());
             } else {
                 return false;

@@ -20,13 +20,8 @@ public class Pessoa {
     private Character sexo;
     private String numCelular;
     private String estadoCivil;
-    private String logradouro;
-    private String numero;
-    private String bairro;
     
     private Endereco endereco;
-    private Cidade cidade;
-
 
     public Pessoa(int codPessoa, String nomePessoa, String cpf, String passsaporte, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, Endereco endereco) {
         this.codPessoa = codPessoa;
@@ -40,47 +35,15 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
-    public Pessoa(String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro) {
+    public Pessoa(String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, Endereco endereco) {
         this.nomePessoa = nomePessoa;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.numCelular = numCelular;
         this.estadoCivil = estadoCivil;
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.bairro = bairro;
-    }
-    
-    public Pessoa(String nomePessoa, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Cidade cidade) {
-        this.nomePessoa = nomePessoa;
-        this.dataNascimento = dataNascimento;
-        this.sexo = sexo;
-        this.numCelular = numCelular;
-        this.estadoCivil = estadoCivil;
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cidade = cidade;
+        this.endereco = endereco;
     }
 
-
-    public Pessoa(Integer codPessoa, String nomePessoa, String cpf, String passsaporte, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, String logradouro, String numero, String bairro, Cidade cidade) {
-        this.codPessoa = codPessoa;
-        this.nomePessoa = nomePessoa;
-        this.cpf = cpf;
-        this.passsaporte = passsaporte;
-        this.dataNascimento = dataNascimento;
-        this.sexo = sexo;
-        this.numCelular = numCelular;
-        this.estadoCivil = estadoCivil;
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.bairro = bairro;
-        this.cidade = cidade;
-    }
-    
-    
-    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -92,10 +55,7 @@ public class Pessoa {
         sb.append(sexo).append(";");
         sb.append(numCelular).append(";");
         sb.append(estadoCivil).append(";");
-        sb.append(logradouro).append(";");
-        sb.append(numero).append(";");
-        sb.append(bairro).append(";");
-        sb.append(cidade).append(";");
+        sb.append(endereco).append(";");
         return sb.toString();
     }
     
@@ -110,10 +70,7 @@ public class Pessoa {
         sb.append("sexo: ").append(sexo).append("\n");
         sb.append("numCelular: ").append(numCelular).append("\n");
         sb.append("estadoCivil: ").append(estadoCivil).append("\n");
-        sb.append("logradouro: ").append(logradouro).append("\n");
-        sb.append("numero: ").append(numero).append("\n");
-        sb.append("bairro: ").append(bairro).append("\n");
-        sb.append("cidade: ").append(cidade).append("\n");
+        sb.append("endereco: ").append(endereco).append("\n");
         sb.append('}');
         return sb.toString();
     }
@@ -189,30 +146,6 @@ public class Pessoa {
         this.estadoCivil = estadoCivil;
     }
 
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
     public Endereco getEndereco() {
         return endereco;
     }
@@ -221,11 +154,4 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
-    public Cidade getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
-    }
 }

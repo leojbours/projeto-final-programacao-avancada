@@ -73,7 +73,7 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
                             case 1:
                                 return pessoa.getNomePessoa();
                             case 2:
-                                return pessoa.getEndereco();
+                                return pessoa.getEndereco().escreveEndereco();
                             case 3:
                                 return pessoa.getCpf();
                             case 4:

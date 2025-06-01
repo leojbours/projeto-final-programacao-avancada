@@ -27,9 +27,24 @@ public class CidadeDAO {
                 + cidade.getNomeCidade().toUpperCase() + "', '" 
                 + cidade.getUf().toUpperCase() + "')";
         
-        ConexaoBD.executeQuery(sql);
+        ConexaoBD.executeUpdate(sql);
     }
-    
+
+    public Cidade recuperarCidade(String nome, String uf) throws SQLException {
+        Cidade cidade = null;
+
+        String sql = "SELECT * FROM cidade WHERE nom_cidade = '" + nome.toUpperCase() + "' AND uf = '" + uf.toUpperCase() + "'";
+
+        resultadoQ = ConexaoBD.executeQuery(sql);
+
+        if (resultadoQ.next()) {
+            cidade = new Cidade(resultadoQ.getInt("cod_cidade"), resultadoQ.getString("nom_cidade"),
+                    resultadoQ.getString("uf"));
+        }
+
+        return cidade;
+    }
+
     public Cidade recuperarCidade(Integer codCidade) throws SQLException {
         Cidade cidade = null;
 

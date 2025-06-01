@@ -7,6 +7,7 @@ package telas;
 import apoio.Formatacao;
 import apoio.Validacao;
 import controladores.ControlaCidade;
+import controladores.ControlaEndereco;
 import controladores.ControlaPessoa;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -34,8 +35,7 @@ public class CadastroPessoa extends javax.swing.JDialog {
     TelaListagemPessoa telaListagemPessoa;
     Pessoa pessoaEditada = null;
     ControlaCidade controlaCidade = new ControlaCidade();
-    Endereco endereco;
-    Cidade cidade;
+    ControlaEndereco controlaEndereco = new ControlaEndereco();
 
     Gson gson = new Gson();
 
@@ -85,10 +85,16 @@ public class CadastroPessoa extends javax.swing.JDialog {
         txtNumeroCelular.setText(pessoaEditada.getNumCelular());
         txtSexo.setText(pessoaEditada.getSexo().toString());
         txtEstadoCivil.setText(pessoaEditada.getEstadoCivil());
-        txtLogradouro.setText(pessoaEditada.getLogradouro());
-        txtNumero.setText(pessoaEditada.getNumero());
-        txtBairro.setText(pessoaEditada.getBairro());
-        cmbCidade.setSelectedIndex(pessoaEditada.getCidade().getCodCidade());
+        txtLogradouro.setText(pessoaEditada.getEndereco().getLogradouro());
+        txtNumero.setText(pessoaEditada.getEndereco().getNumero());
+        txtBairro.setText(pessoaEditada.getEndereco().getBairro());
+        txtCep.setText(pessoaEditada.getEndereco().getCep());
+
+        if (!pessoaEditada.getEndereco().getComplemento().equals("null")) {
+        txtComplemento.setText(pessoaEditada.getEndereco().getComplemento());
+        }
+
+        cmbCidade.setSelectedIndex(pessoaEditada.getEndereco().getCidade().getCodCidade());
     }
 
     /**
@@ -359,10 +365,12 @@ public class CadastroPessoa extends javax.swing.JDialog {
             pessoaEditada.setSexo(txtSexo.getText().trim().toUpperCase().charAt(0));
             pessoaEditada.setNumCelular(txtNumeroCelular.getText());
             pessoaEditada.setEstadoCivil(txtEstadoCivil.getText().toUpperCase());
-            pessoaEditada.setLogradouro(txtLogradouro.getText().toUpperCase());
-            pessoaEditada.setNumero(txtNumero.getText());
-            pessoaEditada.setBairro(txtBairro.getText().toUpperCase());
-            pessoaEditada.setCidade(cidade);
+            pessoaEditada.getEndereco().setLogradouro(txtLogradouro.getText().toUpperCase());
+            pessoaEditada.getEndereco().setNumero(txtNumero.getText().toUpperCase());
+            pessoaEditada.getEndereco().setBairro(txtBairro.getText().toUpperCase());
+            pessoaEditada.getEndereco().setCep(txtCep.getText());
+            pessoaEditada.getEndereco().setComplemento(txtComplemento.getText().toUpperCase().trim());
+            pessoaEditada.getEndereco().setCidade(cidade);
 
             boolean validacaoDocumento = Validacao.validaDocumentoInsercao(this, pessoaEditada);
 
@@ -379,23 +387,36 @@ public class CadastroPessoa extends javax.swing.JDialog {
             }
 
         } else {
-            Pessoa pessoa = new Pessoa(txtNomePessoa.getText().toUpperCase(),
-                    LocalDate.parse(txtDataNascimento.getText(), FORMATO_1),
-                    txtSexo.getText().trim().toUpperCase().charAt(0),
-                    txtNumeroCelular.getText(),
-                    txtEstadoCivil.getText().toUpperCase(),
+            Endereco endereco = new Endereco(Formatacao.removerFormatacao(txtCep.getText()),
                     txtLogradouro.getText().toUpperCase(),
                     txtNumero.getText().toUpperCase(),
                     txtBairro.getText().toUpperCase(),
                     cidade);
 
+            controlaEndereco.salvar(endereco);
+
+            endereco = controlaEndereco.recuperarEndereco(endereco);
+
+            System.out.println(endereco);
+
+            if (!txtComplemento.getText().isEmpty()) {
+                endereco.setComplemento(txtComplemento.getText().toUpperCase());
+            }
+
+            Pessoa pessoa = new Pessoa(txtNomePessoa.getText().toUpperCase(),
+                    LocalDate.parse(txtDataNascimento.getText(), FORMATO_1),
+                    txtSexo.getText().trim().toUpperCase().charAt(0),
+                    txtNumeroCelular.getText(),
+                    txtEstadoCivil.getText().toUpperCase(),
+                    endereco);
+
             boolean validacaoDocumento = Validacao.validaDocumentoInsercao(this, pessoa);
 
-            boolean deuCerto = controlaPessoa.salvar(pessoa);
+            boolean pessoaFoiSalva = controlaPessoa.salvar(pessoa);
 
             if (!validacaoDocumento) {
                 JOptionPane.showMessageDialog(this, "ERRO: pelo menos um dos campos, CPF ou PASSAPORTE, devem ser preenchidos");
-            } else if (deuCerto) {
+            } else if (pessoaFoiSalva) {
                 JOptionPane.showMessageDialog(this, "Salvo com sucesso!");
 
                 limparCampos();
@@ -445,21 +466,17 @@ public class CadastroPessoa extends javax.swing.JDialog {
 
         String response = ConsomeAPI.obterDados(enderecoAPI);
 
-        cidade = gson.fromJson(response, Cidade.class);
+        Cidade cidade = gson.fromJson(response, Cidade.class);
 
         controlaCidade.salvar(cidade);
         new CombosDAO().popularCombo("cidade", cmbCidade);
-//;
-//        for (int i = 0; i < cmbCidade.getItemCount(); i++) {
-//            Cidade c = cmbCidade.getItemAt(i);
-//
-//            if ((cidade.getNomeCidade().toUpperCase().equals(c))) {
-//                cmbCidade.setSelectedIndex(i);
-//            }
-//
-//        }
 
-        endereco = gson.fromJson(response, Endereco.class);
+        //Coloca recupera a cidade salva do banco, para obter o seu id
+        cidade = controlaCidade.recuperarCidade(cidade.getNomeCidade(), cidade.getUf());
+
+        cmbCidade.setSelectedIndex(cidade.getCodCidade());
+
+        Endereco endereco = gson.fromJson(response, Endereco.class);
 
         txtLogradouro.setText(endereco.getLogradouro());
         txtBairro.setText(endereco.getBairro());

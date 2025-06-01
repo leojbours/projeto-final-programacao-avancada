@@ -13,7 +13,7 @@ public class Endereco {
     private int codEndereco;
     private String cep;
     private String logradouro;
-    public String numero;
+    private String numero;
     private String complemento;
     private String bairro;
 
@@ -29,9 +29,35 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+    public Endereco(String cep, String logradouro, String numero, String bairro, Cidade cidade) {
+        this.cep = cep;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+    }
+
+    public String escreveEndereco() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(logradouro).append(", ");
+        sb.append(numero).append(". ");
+        sb.append(bairro).append(". ");
+        sb.append(cidade.getNomeCidade()).append(" - ");
+        sb.append(cidade.getUf());
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
-        return "Endereco{" + "idEndereco=" + codEndereco + ", cep=" + cep + ", logradouro=" + logradouro + ", complemento=" + complemento + ", bairro=" + bairro + '}';
+        return "Endereco{" +
+                "codEndereco=" + codEndereco +
+                ", cep='" + cep + '\'' +
+                ", logradouro='" + logradouro + '\'' +
+                ", numero='" + numero + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade=" + cidade +
+                '}';
     }
 
     public int getCodEndereco() {

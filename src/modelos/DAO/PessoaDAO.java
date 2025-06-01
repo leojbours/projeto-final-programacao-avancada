@@ -27,7 +27,7 @@ public class PessoaDAO {
     public void salvar(Pessoa pessoa) throws SQLException {
 
         String sql = ""
-                + "INSERT INTO pessoa (cod_endereco, nom_pessoa, cpf, passaporte, dat_nascimento, sexo, num_celular, estado_civil, logradouro, numero, bairro, ativo) VALUES ("
+                + "INSERT INTO pessoa (cod_endereco, nom_pessoa, cpf, passaporte, dat_nascimento, sexo, num_celular, estado_civil, ativo) VALUES ("
                 + pessoa.getEndereco().getCodEndereco() + ", '"
                 + pessoa.getNomePessoa() + "', '"
                 + pessoa.getCpf() + "', '"
@@ -35,7 +35,7 @@ public class PessoaDAO {
                 + pessoa.getDataNascimento() + "', '"
                 + pessoa.getSexo() + "', '"
                 + pessoa.getNumCelular() + "', '"
-                + pessoa.getEstadoCivil() + "', '"
+                + pessoa.getEstadoCivil() + "', "
                 + "TRUE)";
 
         ConexaoBD.executeUpdate(sql);
