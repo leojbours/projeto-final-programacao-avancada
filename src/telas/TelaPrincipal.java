@@ -4,17 +4,26 @@
  */
 package telas;
 
+import modelos.Usuario;
+
 /**
  *
  * @author leonardo.bourscheid
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    Usuario usuarioLogado;
+    
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaPrincipal() {
+    public TelaPrincipal(Usuario usuario) {
         initComponents();
+        setLocationRelativeTo(null);
+        this.usuarioLogado = usuario;
+        if (!usuarioLogado.getUsuario().equals("admin")) {
+            menuCadastros.remove(mnuUsuarios);
+        }
     }
 
     /**
@@ -32,6 +41,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastros = new javax.swing.JMenu();
         mnuPessoa = new javax.swing.JMenuItem();
         mnuAnimal = new javax.swing.JMenuItem();
+        mnuUsuarios = new javax.swing.JMenuItem();
 
         jMenu2.setText("File");
         jMenuBar2.add(jMenu2);
@@ -70,6 +80,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastros.add(mnuAnimal);
 
+        mnuUsuarios.setText("Usuários");
+        menuCadastros.add(mnuUsuarios);
+
         barraMenu.add(menuCadastros);
 
         setJMenuBar(barraMenu);
@@ -97,7 +110,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void mnuAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAnimalActionPerformed
         TelaListagemAnimal telaListagemAnimal = new TelaListagemAnimal();
         dskPainel.add(telaListagemAnimal);
-        telaListagemAnimal.setVisible(true);                                       
+        telaListagemAnimal.setVisible(true);
     }//GEN-LAST:event_mnuAnimalActionPerformed
 
     /**
@@ -130,7 +143,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipal().setVisible(true);
+                new TelaPrincipal(null).setVisible(true);
             }
         });
     }
@@ -144,5 +157,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenuItem mnuAnimal;
     private javax.swing.JMenuItem mnuPessoa;
+    private javax.swing.JMenuItem mnuUsuarios;
     // End of variables declaration//GEN-END:variables
 }

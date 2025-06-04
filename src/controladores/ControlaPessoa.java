@@ -75,6 +75,3 @@ public class ControlaPessoa {
     
 }
 
-//editar
-    
-    //deletar
