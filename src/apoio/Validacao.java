@@ -17,15 +17,26 @@ public class Validacao {
          if (cadastroPessoa.getTxtCpf().getText().trim().equals("") && !cadastroPessoa.getTxtPassaporte().getText().trim().equals("")) {
                 pessoa.setPasssaporte(cadastroPessoa.getTxtPassaporte().getText());
             } else if (!cadastroPessoa.getTxtCpf().getText().trim().equals("") && cadastroPessoa.getTxtPassaporte().getText().trim().equals("")) {
-                pessoa.setCpf(Formatacao.removerFormatacao(cadastroPessoa.getTxtCpf().getText()));
+                pessoa.setCpf(encontraCpfVazio(Formatacao.removerFormatacao(cadastroPessoa.getTxtCpf().getText())));
             } else if (!cadastroPessoa.getTxtCpf().getText().trim().equals("") && !cadastroPessoa.getTxtPassaporte().getText().trim().equals("")) {
-                pessoa.setCpf(Formatacao.removerFormatacao(cadastroPessoa.getTxtCpf().getText()));
+                pessoa.setCpf(encontraCpfVazio(Formatacao.removerFormatacao(cadastroPessoa.getTxtCpf().getText())));
                 pessoa.setPasssaporte(cadastroPessoa.getTxtPassaporte().getText());
             } else {
                 return false;
             }
          
          return true;
+    }
+
+    public static String encontraCpfVazio(String cpf) {
+        if (cpf != null) {
+            if (cpf.isBlank()) {
+                return null;
+            } else {
+                return cpf;
+            }
+        }
+        return null;
     }
     
     private static int calcularDigito(String str, int[] peso) {

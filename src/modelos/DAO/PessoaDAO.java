@@ -30,7 +30,7 @@ public class PessoaDAO {
                 + "INSERT INTO pessoa (cod_endereco, nom_pessoa, cpf, passaporte, dat_nascimento, sexo, num_celular, estado_civil, ativo) VALUES ("
                 + pessoa.getEndereco().getCodEndereco() + ", '"
                 + pessoa.getNomePessoa() + "', '"
-                + pessoa.getCpf() + "', '"
+                + pessoa.getCpf().trim() + "', '"
                 + pessoa.getPasssaporte() + "', '"
                 + pessoa.getDataNascimento() + "', '"
                 + pessoa.getSexo() + "', '"

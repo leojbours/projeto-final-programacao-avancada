@@ -44,7 +44,7 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
                         case 2:
                             return "ENDERECO";
                         case 3:
-                            return "CPF";
+                            return "DOCUMENTO";
                         case 4:
                             return "NASCIMENTO";
                         default:
@@ -65,6 +65,7 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
                 @Override
                 public Object getValueAt(int rowIndex, int columnIndex) {
                     Pessoa pessoa = pessoas.get(rowIndex);
+                    pessoas.forEach(Pessoa::defineDocumento);
 
                     if (pessoa != null) {
                         switch (columnIndex) {
@@ -75,7 +76,7 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
                             case 2:
                                 return pessoa.getEndereco().escreveEndereco();
                             case 3:
-                                return pessoa.getCpf();
+                                return pessoa.getDocumento();
                             case 4:
                                 return pessoa.getDataNascimento();
                         }

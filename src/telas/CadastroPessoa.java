@@ -512,6 +512,7 @@ public class CadastroPessoa extends javax.swing.JDialog {
         txtNumeroCelular.setText("");
         txtSexo.setText("");
         txtEstadoCivil.setText("");
+        txtCep.setText("");
         txtLogradouro.setText("");
         txtNumero.setText("");
         txtBairro.setText("");

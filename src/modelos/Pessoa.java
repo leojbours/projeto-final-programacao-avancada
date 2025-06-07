@@ -7,7 +7,6 @@ package modelos;
 import java.time.LocalDate;
 
 /**
- *
  * @author leonardo
  */
 public class Pessoa {
@@ -16,11 +15,12 @@ public class Pessoa {
     private String nomePessoa;
     private String cpf;
     private String passsaporte;
+    private String documento;
     private LocalDate dataNascimento;
     private Character sexo;
     private String numCelular;
     private String estadoCivil;
-    
+
     private Endereco endereco;
 
     public Pessoa(int codPessoa, String nomePessoa, String cpf, String passsaporte, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, Endereco endereco) {
@@ -58,7 +58,7 @@ public class Pessoa {
         sb.append(endereco).append(";");
         return sb.toString();
     }
-    
+
     public String imprimeAtributos() {
         StringBuilder sb = new StringBuilder();
         sb.append("Pessoa{ \n");
@@ -74,7 +74,7 @@ public class Pessoa {
         sb.append('}');
         return sb.toString();
     }
-    
+
 //    public String getEndereco() {
 //        StringBuilder sb = new StringBuilder();
 //        sb.append(logradouro).append(", ");
@@ -84,12 +84,12 @@ public class Pessoa {
 //        sb.append(cidade.getUf());
 //        return sb.toString();
 //    }
-    
-    
+
+
     public Integer getCodPessoa() {
         return codPessoa;
     }
-    
+
     public String getNomePessoa() {
         return nomePessoa;
     }
@@ -99,7 +99,11 @@ public class Pessoa {
     }
 
     public String getCpf() {
-        return cpf;
+        if (cpf == null || cpf.trim().equals("null")) {
+            return "";
+        } else {
+            return cpf;
+        }
     }
 
     public void setCpf(String cpf) {
@@ -112,6 +116,23 @@ public class Pessoa {
 
     public void setPasssaporte(String passsaporte) {
         this.passsaporte = passsaporte;
+    }
+
+    public String getDocumento() {
+        defineDocumento();
+        if (documento == null) {
+            return "N/A";
+        } else {
+            return documento;
+        }
+    }
+
+    public void defineDocumento() {
+        if (cpf == null || cpf.trim().equals("null") || cpf.isBlank()) {
+            this.documento = this.passsaporte;
+        } else {
+            this.documento = this.cpf;
+        }
     }
 
     public LocalDate getDataNascimento() {
