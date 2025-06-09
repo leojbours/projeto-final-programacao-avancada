@@ -18,7 +18,7 @@ import modelos.Animal;
  */
 public class TelaListagemAnimal extends javax.swing.JInternalFrame {
 
-    ControlaAnimal controlaAnimal = new ControlaAnimal();
+    ControlaAnimal controlaAnimal = ControlaAnimal.getInstance();
 
     /**
      * Creates new form TelaListagemAnimal
@@ -205,7 +205,7 @@ public class TelaListagemAnimal extends javax.swing.JInternalFrame {
 
     private void btnCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraActionPerformed
         JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
-        CadastroAnimal telaCadastroAnimal = new CadastroAnimal(telaAnterior, true, controlaAnimal, this);
+        CadastroAnimal telaCadastroAnimal = new CadastroAnimal(telaAnterior, true, this);
         telaCadastroAnimal.setLocationRelativeTo(telaAnterior);
         telaCadastroAnimal.setVisible(true);
     }//GEN-LAST:event_btnCadastraActionPerformed
@@ -249,7 +249,7 @@ public class TelaListagemAnimal extends javax.swing.JInternalFrame {
             Integer codAnimal = Integer.valueOf(codAnimalString);
 
             JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
-            CadastroAnimal telaCadastroAnimal = new CadastroAnimal(telaAnterior, true, controlaAnimal, this, codAnimal);
+            CadastroAnimal telaCadastroAnimal = new CadastroAnimal(telaAnterior, true, this, codAnimal);
             telaCadastroAnimal.setLocationRelativeTo(telaAnterior);
             telaCadastroAnimal.setVisible(true);
         }

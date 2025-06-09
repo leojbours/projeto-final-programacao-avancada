@@ -17,7 +17,7 @@ import modelos.Animal;
 public class CadastroAnimal extends javax.swing.JDialog {
 
     private static DateTimeFormatter FORMATO_1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    ControlaAnimal controlaAnimal;
+    ControlaAnimal controlaAnimal = ControlaAnimal.getInstance();
     TelaListagemAnimal telaListagemAnimal;
     Animal animalEditado = null;
 
@@ -25,18 +25,16 @@ public class CadastroAnimal extends javax.swing.JDialog {
      * Creates new form CadastroAnimal
      */
     //Contrutor tela de cadastro
-    public CadastroAnimal(java.awt.Frame parent, boolean modal, ControlaAnimal ca, TelaListagemAnimal tl) {
+    public CadastroAnimal(java.awt.Frame parent, boolean modal, TelaListagemAnimal tl) {
         super(parent, modal);
         initComponents();
-        this.controlaAnimal = ca;
         this.telaListagemAnimal = tl;
     }
 
     //Construtor tela de ediçao
-    public CadastroAnimal(java.awt.Frame parent, boolean modal, ControlaAnimal ca, TelaListagemAnimal tl, Integer codAnimal) {
+    public CadastroAnimal(java.awt.Frame parent, boolean modal, TelaListagemAnimal tl, Integer codAnimal) {
         super(parent, modal);
         initComponents();
-        this.controlaAnimal = ca;
         this.telaListagemAnimal = tl;
         this.animalEditado = controlaAnimal.recuperarAnimal(codAnimal);
 

@@ -19,6 +19,15 @@ public class ControlaPessoa {
     
     PessoaDAO pessoaDAO = new PessoaDAO();
 
+    private static ControlaPessoa instace;
+
+    public static ControlaPessoa getInstace() {
+        if (instace == null) {
+            instace = new ControlaPessoa();
+        }
+        return instace;
+    }
+
     public boolean salvar(Pessoa pessoa) {
         try {
             pessoaDAO.salvar(pessoa);

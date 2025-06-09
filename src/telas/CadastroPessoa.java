@@ -31,11 +31,11 @@ import modelos.Endereco;
 public class CadastroPessoa extends javax.swing.JDialog {
 
     static DateTimeFormatter FORMATO_1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    ControlaPessoa controlaPessoa;
     TelaListagemPessoa telaListagemPessoa;
+    ControlaPessoa controlaPessoa = ControlaPessoa.getInstace();
+    ControlaCidade controlaCidade = ControlaCidade.getInstance();
+    ControlaEndereco controlaEndereco = ControlaEndereco.getInstance();
     Pessoa pessoaEditada = null;
-    ControlaCidade controlaCidade = new ControlaCidade();
-    ControlaEndereco controlaEndereco = new ControlaEndereco();
 
     Gson gson = new Gson();
 
@@ -43,10 +43,9 @@ public class CadastroPessoa extends javax.swing.JDialog {
      * Creates new form CadastroPessoa
      */
     //Construtor tela de cadastro
-    public CadastroPessoa(java.awt.Frame parent, boolean modal, ControlaPessoa cp, TelaListagemPessoa tl) {
+    public CadastroPessoa(java.awt.Frame parent, boolean modal, TelaListagemPessoa tl) {
         super(parent, modal);
         initComponents();
-        this.controlaPessoa = cp;
         this.telaListagemPessoa = tl;
         //Popula combo box resgatando cidades do banco de dados
         new CombosDAO().popularCombo("cidade", cmbCidade);
@@ -58,10 +57,9 @@ public class CadastroPessoa extends javax.swing.JDialog {
     }
 
     //Construtor tela de edicao
-    public CadastroPessoa(java.awt.Frame parent, boolean modal, ControlaPessoa cp, TelaListagemPessoa tl, Integer codPessoa) {
+    public CadastroPessoa(java.awt.Frame parent, boolean modal, TelaListagemPessoa tl, Integer codPessoa) {
         super(parent, modal);
         initComponents();
-        this.controlaPessoa = cp;
         this.telaListagemPessoa = tl;
         this.pessoaEditada = controlaPessoa.recuperarPessoa(codPessoa);
         new CombosDAO().popularCombo("cidade", cmbCidade);
@@ -492,7 +490,7 @@ public class CadastroPessoa extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CadastroPessoa dialog = new CadastroPessoa(new javax.swing.JFrame(), true, null, null);
+                CadastroPessoa dialog = new CadastroPessoa(new javax.swing.JFrame(), true, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

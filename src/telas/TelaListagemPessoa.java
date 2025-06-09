@@ -18,7 +18,7 @@ import modelos.Pessoa;
  */
 public class TelaListagemPessoa extends javax.swing.JInternalFrame {
 
-    ControlaPessoa controlaPessoa = new ControlaPessoa();
+    ControlaPessoa controlaPessoa = ControlaPessoa.getInstace();
 
     /**
      * Creates new form TelaListagemPessoa
@@ -194,7 +194,7 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
 
     private void btnCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraActionPerformed
         JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
-        CadastroPessoa telaCadastroPessoa = new CadastroPessoa(telaAnterior, true, controlaPessoa, this);
+        CadastroPessoa telaCadastroPessoa = new CadastroPessoa(telaAnterior, true, this);
         telaCadastroPessoa.setLocationRelativeTo(telaAnterior);
         telaCadastroPessoa.setVisible(true);
     }//GEN-LAST:event_btnCadastraActionPerformed
@@ -212,7 +212,7 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
             Integer codPessoa = Integer.valueOf(codPessoaString);
 
             JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
-            CadastroPessoa telaCadastroPessoa = new CadastroPessoa(telaAnterior, true, controlaPessoa, this, codPessoa);
+            CadastroPessoa telaCadastroPessoa = new CadastroPessoa(telaAnterior, true, this, codPessoa);
             telaCadastroPessoa.setLocationRelativeTo(telaAnterior);
             telaCadastroPessoa.setVisible(true);
         }

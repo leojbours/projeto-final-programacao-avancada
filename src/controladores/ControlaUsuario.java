@@ -17,7 +17,17 @@ public class ControlaUsuario {
     UsuarioDAO usuarioDAO = new UsuarioDAO();
     
     Usuario usuarioRecuperado = null;
-    
+
+    private static ControlaUsuario instace;
+
+    public static ControlaUsuario getInstace() {
+        if (instace == null) {
+            instace = new ControlaUsuario();
+        }
+
+        return instace;
+    }
+
     public int validaLogin(String usuario, String senha) {
         
         try {

@@ -17,6 +17,15 @@ public class ControlaAnimal {
 
     AnimalDAO animalDAO = new AnimalDAO();
 
+    private static ControlaAnimal instance;
+
+    public static ControlaAnimal getInstance() {
+        if (instance == null) {
+            instance = new ControlaAnimal();
+        }
+        return instance;
+    }
+
     public boolean salvar(Animal animal) {
         try {
             animalDAO.salvar(animal);

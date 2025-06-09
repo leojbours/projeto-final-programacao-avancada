@@ -17,6 +17,15 @@ public class ControlaEndereco {
 
     EnderecoDAO enderecoDAO = new EnderecoDAO();
 
+    private static ControlaEndereco instance;
+
+    public static ControlaEndereco getInstance() {
+        if (instance == null) {
+            instance = new ControlaEndereco();
+        }
+        return instance;
+    }
+
     public boolean salvar(Endereco endereco) {
 
         try {

@@ -18,6 +18,15 @@ public class ControlaCidade {
 
     CidadeDAO cidadeDAO = new CidadeDAO();
 
+    private static ControlaCidade instance;
+
+    public static ControlaCidade getInstance() {
+        if (instance == null) {
+            instance = new ControlaCidade();
+        }
+        return instance;
+    }
+
     public boolean salvar(Cidade cidade) {
 
         try {
