@@ -105,7 +105,7 @@ public class PessoaDAO {
                 + "dat_nascimento = '" + pessoa.getDataNascimento() + "', "
                 + "sexo = '" + pessoa.getSexo() + "', "
                 + "num_celular = '" + pessoa.getNumCelular() + "', "
-                + "estado_civil = '" + pessoa.getEstadoCivil() + "', "
+                + "estado_civil = '" + pessoa.getEstadoCivil() + "' "
                 + "WHERE cod_pessoa = " + pessoa.getCodPessoa();
                 
         ConexaoBD.executeUpdate(sql);

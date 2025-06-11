@@ -347,7 +347,7 @@ public class CadastroPessoa extends javax.swing.JDialog {
             pessoaEditada.getEndereco().setLogradouro(txtLogradouro.getText().toUpperCase());
             pessoaEditada.getEndereco().setNumero(txtNumero.getText().toUpperCase());
             pessoaEditada.getEndereco().setBairro(txtBairro.getText().toUpperCase());
-            pessoaEditada.getEndereco().setCep(txtCep.getText());
+            pessoaEditada.getEndereco().setCep(Formatacao.removerFormatacao(txtCep.getText()));
             pessoaEditada.getEndereco().setComplemento(txtComplemento.getText().toUpperCase().trim());
             pessoaEditada.getEndereco().setCidade(cidade);
 
