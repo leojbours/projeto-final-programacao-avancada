@@ -2,6 +2,7 @@ package apoio;
 
 import java.text.*;
 import java.text.Normalizer.Form;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -12,6 +13,8 @@ import javax.swing.text.*;
 
 public class Formatacao {
 
+    public static DateTimeFormatter FORMATO_1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    
     private static final Pattern NONLATIN = Pattern.compile("[^\\w-]");
     private static final Pattern WHITESPACE = Pattern.compile("[\\s]");
     static DecimalFormat df = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale("pt", "BR")));

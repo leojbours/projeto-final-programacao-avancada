@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import modelos.Pessoa;
+import apoio.Formatacao;
 
 /**
  *
@@ -78,7 +79,7 @@ public class TelaListagemPessoa extends javax.swing.JInternalFrame {
                             case 3:
                                 return pessoa.getDocumento();
                             case 4:
-                                return pessoa.getDataNascimento();
+                                return pessoa.getDataNascimento().format(Formatacao.FORMATO_1);
                         }
 
                     }

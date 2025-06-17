@@ -30,7 +30,6 @@ import modelos.Endereco;
  */
 public class CadastroPessoa extends javax.swing.JDialog {
 
-    static DateTimeFormatter FORMATO_1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     TelaListagemPessoa telaListagemPessoa;
     ControlaPessoa controlaPessoa = ControlaPessoa.getInstace();
     ControlaCidade controlaCidade = ControlaCidade.getInstance();
@@ -79,7 +78,7 @@ public class CadastroPessoa extends javax.swing.JDialog {
             txtPassaporte.setText(pessoaEditada.getPasssaporte());
         }
 
-        txtDataNascimento.setText(pessoaEditada.getDataNascimento().format(FORMATO_1));
+        txtDataNascimento.setText(pessoaEditada.getDataNascimento().format(Formatacao.FORMATO_1));
         txtNumeroCelular.setText(pessoaEditada.getNumCelular());
         txtSexo.setText(pessoaEditada.getSexo().toString());
         txtEstadoCivil.setText(pessoaEditada.getEstadoCivil());
@@ -334,79 +333,11 @@ public class CadastroPessoa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        ComboItem cidadeCombo = (ComboItem) cmbCidade.getSelectedItem();
-        Cidade cidade = controlaCidade.recuperarCidade(cidadeCombo.getCodigo());
-
         if (pessoaEditada != null) {
-
-            pessoaEditada.setNomePessoa(txtNomePessoa.getText().toUpperCase());
-            pessoaEditada.setDataNascimento(LocalDate.parse(txtDataNascimento.getText(), FORMATO_1));
-            pessoaEditada.setSexo(txtSexo.getText().trim().toUpperCase().charAt(0));
-            pessoaEditada.setNumCelular(txtNumeroCelular.getText());
-            pessoaEditada.setEstadoCivil(txtEstadoCivil.getText().toUpperCase());
-            pessoaEditada.getEndereco().setLogradouro(txtLogradouro.getText().toUpperCase());
-            pessoaEditada.getEndereco().setNumero(txtNumero.getText().toUpperCase());
-            pessoaEditada.getEndereco().setBairro(txtBairro.getText().toUpperCase());
-            pessoaEditada.getEndereco().setCep(Formatacao.removerFormatacao(txtCep.getText()));
-            pessoaEditada.getEndereco().setComplemento(txtComplemento.getText().toUpperCase().trim());
-            pessoaEditada.getEndereco().setCidade(cidade);
-
-            boolean validacaoDocumento = Validacao.validaDocumentoInsercao(this, pessoaEditada);
-
-            boolean deuCerto = controlaPessoa.editar(pessoaEditada);
-
-            if (!validacaoDocumento) {
-                JOptionPane.showMessageDialog(null, "ERRO: pelo menos um dos campos, CPF ou PASSAPORTE, devem ser preenchidos");
-            } else if (deuCerto) {
-                JOptionPane.showMessageDialog(this, "Editado com sucesso!");
-                telaListagemPessoa.montaTabela();
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro ao salvar, tente novamente: ");
-            }
-
+            editaPessoa();
         } else {
-            Endereco endereco = new Endereco(Formatacao.removerFormatacao(txtCep.getText()),
-                    txtLogradouro.getText().toUpperCase(),
-                    txtNumero.getText().toUpperCase(),
-                    txtBairro.getText().toUpperCase(),
-                    cidade);
-
-            controlaEndereco.salvar(endereco);
-
-            endereco = controlaEndereco.recuperarEndereco(endereco);
-
-            if (!txtComplemento.getText().isEmpty()) {
-                endereco.setComplemento(txtComplemento.getText().toUpperCase());
-            }
-
-            Pessoa pessoa = new Pessoa(txtNomePessoa.getText().toUpperCase(),
-                    LocalDate.parse(txtDataNascimento.getText(), FORMATO_1),
-                    txtSexo.getText().trim().toUpperCase().charAt(0),
-                    txtNumeroCelular.getText(),
-                    txtEstadoCivil.getText().toUpperCase(),
-                    endereco);
-
-            boolean validacaoDocumento = Validacao.validaDocumentoInsercao(this, pessoa);
-
-            boolean pessoaFoiSalva = controlaPessoa.salvar(pessoa);
-
-            if (!validacaoDocumento) {
-                JOptionPane.showMessageDialog(this, "ERRO: pelo menos um dos campos, CPF ou PASSAPORTE, devem ser preenchidos");
-            } else if (pessoaFoiSalva) {
-                JOptionPane.showMessageDialog(this, "Salvo com sucesso!");
-
-                limparCampos();
-
-                txtNomePessoa.requestFocus();
-
-                telaListagemPessoa.montaTabela();
-            } else {
-                JOptionPane.showMessageDialog(this, "Erro ao salvar, tente novamente: ");
-            }
-
+            salvarPessoa();
         }
-
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtNomePessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomePessoaActionPerformed
@@ -524,6 +455,84 @@ public class CadastroPessoa extends javax.swing.JDialog {
 
     public JTextField getTxtPassaporte() {
         return txtPassaporte;
+    }
+    
+    private void salvarPessoa() {
+        Cidade cidade = recuperaCidade();
+        Endereco endereco = new Endereco(Formatacao.removerFormatacao(txtCep.getText()),
+                txtLogradouro.getText().toUpperCase(),
+                txtNumero.getText().toUpperCase(),
+                txtBairro.getText().toUpperCase(),
+                cidade);
+
+        controlaEndereco.salvar(endereco);
+
+        endereco = controlaEndereco.recuperarEndereco(endereco);
+
+        if (!txtComplemento.getText().isEmpty()) {
+            endereco.setComplemento(txtComplemento.getText().toUpperCase());
+        }
+
+        Pessoa pessoa = new Pessoa(txtNomePessoa.getText().toUpperCase(),
+                LocalDate.parse(txtDataNascimento.getText(), Formatacao.FORMATO_1),
+                txtSexo.getText().trim().toUpperCase().charAt(0),
+                txtNumeroCelular.getText(),
+                txtEstadoCivil.getText().toUpperCase(),
+                endereco);
+
+        boolean validacaoDocumento = Validacao.validaDocumentoInsercao(this, pessoa);
+
+        boolean pessoaFoiSalva = controlaPessoa.salvar(pessoa);
+
+        if (!validacaoDocumento) {
+            JOptionPane.showMessageDialog(this, "ERRO: pelo menos um dos campos, CPF ou PASSAPORTE, devem ser preenchidos");
+        } else if (pessoaFoiSalva) {
+            JOptionPane.showMessageDialog(this, "Salvo com sucesso!");
+
+            limparCampos();
+
+            txtNomePessoa.requestFocus();
+
+            telaListagemPessoa.montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar, tente novamente: ");
+        }
+    }
+    
+    private void editaPessoa() {
+        Cidade cidade = recuperaCidade();
+        
+        pessoaEditada.setNomePessoa(txtNomePessoa.getText().toUpperCase());
+        pessoaEditada.setDataNascimento(LocalDate.parse(txtDataNascimento.getText(), Formatacao.FORMATO_1));
+        pessoaEditada.setSexo(txtSexo.getText().trim().toUpperCase().charAt(0));
+        pessoaEditada.setNumCelular(txtNumeroCelular.getText());
+        pessoaEditada.setEstadoCivil(txtEstadoCivil.getText().toUpperCase());
+        pessoaEditada.getEndereco().setLogradouro(txtLogradouro.getText().toUpperCase());
+        pessoaEditada.getEndereco().setNumero(txtNumero.getText().toUpperCase());
+        pessoaEditada.getEndereco().setBairro(txtBairro.getText().toUpperCase());
+        pessoaEditada.getEndereco().setCep(Formatacao.removerFormatacao(txtCep.getText()));
+        pessoaEditada.getEndereco().setComplemento(txtComplemento.getText().toUpperCase().trim());
+        pessoaEditada.getEndereco().setCidade(cidade);
+
+        boolean validacaoDocumento = Validacao.validaDocumentoInsercao(this, pessoaEditada);
+
+        boolean deuCerto = controlaPessoa.editar(pessoaEditada);
+
+        if (!validacaoDocumento) {
+            JOptionPane.showMessageDialog(null, "ERRO: pelo menos um dos campos, CPF ou PASSAPORTE, devem ser preenchidos");
+        } else if (deuCerto) {
+            JOptionPane.showMessageDialog(this, "Editado com sucesso!");
+            telaListagemPessoa.montaTabela();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar, tente novamente: ");
+        }
+    }
+    
+    private Cidade recuperaCidade() {
+        ComboItem cidadeCombo = (ComboItem) cmbCidade.getSelectedItem();
+        Cidade cidade = controlaCidade.recuperarCidade(cidadeCombo.getCodigo());
+        return cidade;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
