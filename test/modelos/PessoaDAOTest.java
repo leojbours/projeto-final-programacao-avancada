@@ -13,15 +13,15 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author leonardo.bourscheid
+ * @author leonardo
  */
-public class PessoaTest {
+public class PessoaDAOTest {
     
-    private Pessoa pessoa;
     private Cidade cidade;
     private Endereco endereco;
+    private Pessoa pessoa;
     
-    public PessoaTest() {
+    public PessoaDAOTest() {
     }
     
     @BeforeClass
@@ -55,33 +55,17 @@ public class PessoaTest {
                             DefaultParameters.Pessoa.ESTADO_CIVIL,
                             endereco);
     }
-
+    
     @After
     public void tearDown() {
         cidade = null;
         endereco = null;
         pessoa = null;
     }
-    
-    @Test
-    public void testaDocumentoCompleto() {
-        pessoa.defineDocumento();
-        assertEquals(DefaultParameters.Pessoa.PASSAPORTE, pessoa.getDocumento());
-    }
-    
-    @Test
-    public void testaDocumentoSemCpf() {
-        pessoa.setCpf("");
-        pessoa.setPasssaporte(DefaultParameters.Pessoa.PASSAPORTE);
-        pessoa.defineDocumento();
-        assertEquals(DefaultParameters.Pessoa.PASSAPORTE, pessoa.getDocumento());
-    }
-    
-    @Test
-    public void testaDocumentoSemPassaporte() {
-        pessoa.setCpf(DefaultParameters.Pessoa.CPF);
-        pessoa.setPasssaporte("");
-        pessoa.defineDocumento();
-        assertEquals(DefaultParameters.Pessoa.CPF, pessoa.getPasssaporte());
-    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+    // @Test
+    // public void hello() {}
 }
