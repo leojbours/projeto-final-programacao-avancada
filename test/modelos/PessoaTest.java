@@ -66,7 +66,7 @@ public class PessoaTest {
     @Test
     public void testaDocumentoCompleto() {
         pessoa.defineDocumento();
-        assertEquals(DefaultParameters.Pessoa.PASSAPORTE, pessoa.getDocumento());
+        assertEquals(DefaultParameters.Pessoa.CPF, pessoa.getDocumento());
     }
     
     @Test
@@ -82,6 +82,6 @@ public class PessoaTest {
         pessoa.setCpf(DefaultParameters.Pessoa.CPF);
         pessoa.setPasssaporte("");
         pessoa.defineDocumento();
-        assertEquals(DefaultParameters.Pessoa.CPF, pessoa.getPasssaporte());
+        assertEquals(DefaultParameters.Pessoa.CPF, pessoa.getDocumento());
     }
 }

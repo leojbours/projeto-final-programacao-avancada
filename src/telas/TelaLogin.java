@@ -97,7 +97,7 @@ public class TelaLogin extends javax.swing.JFrame {
         try {
             
             int bemSucedido = controlaUsuario.validaLogin(txtUsuario.getText(),
-                    Validacao.criptografarSenha(txtSenha.getText()));
+                         Validacao.criptografarSenha(txtSenha.getText()));
             
             if (bemSucedido == 1) {
                 TelaPrincipal telaPrincipal = new TelaPrincipal(controlaUsuario.getUsuarioLogado());

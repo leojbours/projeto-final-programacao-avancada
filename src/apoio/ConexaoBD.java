@@ -70,6 +70,23 @@ public class ConexaoBD {
     public static int executeUpdate(String sql) throws SQLException {
         return ConexaoBD.getInstance().getConnection().createStatement().executeUpdate(sql);
     }
+    
+        /**
+     * Executa uma consulta no banco de dados recebendo constante
+     *
+     * @param sql: query a ser executada
+     * @param constante: ex: RETURN_GENERATED_KEYS
+     * @return ResultSet
+     * @throws java.sql.SQLException
+     */
+    public static int executeUpdateReturnId(String sql) throws SQLException {
+        Statement st = ConexaoBD.getInstance().getConnection().createStatement();
+        st.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+        ResultSet chave = st.getGeneratedKeys();
+        chave.next();
+        int id = chave.getInt(1);
+        return id;
+    }
 
     /**
      * Executa uma consulta no banco de dados

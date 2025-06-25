@@ -36,9 +36,9 @@ public class PessoaDAO {
                 + pessoa.getSexo() + "', '"
                 + pessoa.getNumCelular() + "', '"
                 + pessoa.getEstadoCivil() + "', "
-                + "TRUE)";
+                + "TRUE) RETURNING cod_pessoa";
 
-        ConexaoBD.executeUpdate(sql);
+        pessoa.setCodPessoa(ConexaoBD.executeUpdateReturnId(sql));
     }
 
     public Pessoa recuperarPessoa(Integer codPessoa) throws SQLException {

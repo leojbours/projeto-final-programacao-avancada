@@ -89,6 +89,10 @@ public class Pessoa {
     public Integer getCodPessoa() {
         return codPessoa;
     }
+    
+    public void setCodPessoa(int codPessoa) {
+        this.codPessoa = codPessoa;
+    }
 
     public String getNomePessoa() {
         return nomePessoa;
