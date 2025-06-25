@@ -18,9 +18,15 @@ public class ConexaoBD {
 
     public ConexaoBD() {
         try {
+            
+            String arquivo = System.getProperty("db.config");
+            if (arquivo == null || arquivo.trim().isEmpty()) {
+                arquivo = "db.properties";
+            }
+            
             // Carrega informações do arquivo de propriedades
             Properties prop = new Properties();
-            prop.load(new FileInputStream("db.properties"));
+            prop.load(new FileInputStream(arquivo));
             String dbdriver = prop.getProperty("db.driver");
             String dburl = prop.getProperty("db.url");
             String dbuser = prop.getProperty("db.user");
