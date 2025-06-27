@@ -26,7 +26,11 @@ public class AnimalDAO {
                 + animal.getLocalDeEncontro() + "', '" + animal.getRaca() + "', '" + animal.getCor() + "', '" + animal.getSexo()
                 + "', " + animal.getIdade() + ")";
 
-        ConexaoBD.executeUpdate(sql);
+        animal.setCodAnimal(ConexaoBD.executeUpdateReturnId(sql));
+        
+        String updateResumo = "UPDATE animal set resumo_pet = " + animal.getResumoPet();
+        
+        ConexaoBD.executeUpdate(updateResumo);
     }
 
     public Animal recuperarAnimal(Integer codAnimal) throws SQLException {
@@ -40,7 +44,8 @@ public class AnimalDAO {
             animal = new Animal(resultadoQ.getInt("cod_animal"), resultadoQ.getString("nom_animal"),
                     resultadoQ.getString("tipo_animal"), LocalDate.parse(resultadoQ.getString("dat_encontro")),
                     resultadoQ.getString("raca"), resultadoQ.getInt("idade"), resultadoQ.getString("cor"),
-                    resultadoQ.getString("sexo").charAt(0), resultadoQ.getString("local_encontro"));
+                    resultadoQ.getString("sexo").charAt(0), resultadoQ.getString("local_encontro"),
+                    resultadoQ.getString("resumo_pet"));
         }
 
         return animal;
@@ -64,7 +69,8 @@ public class AnimalDAO {
                         resultadoQ.getInt("idade"), 
                         resultadoQ.getString("cor"),
                         resultadoQ.getString("sexo").charAt(0), 
-                        resultadoQ.getString("local_encontro"));
+                        resultadoQ.getString("local_encontro"),
+                        resultadoQ.getString("resumo_pet"));
                 animais.add(animal);
             }
         }
@@ -83,7 +89,8 @@ public class AnimalDAO {
                 + "idade = " + animal.getIdade() + ", "
                 + "cor = '" + animal.getCor() + "', "
                 + "sexo = '" + animal.getSexo() + "', "
-                + "local_encontro = '" + animal.getLocalDeEncontro() + "' "
+                + "local_encontro = '" + animal.getLocalDeEncontro() + "', "
+                + "resumo_pet = '" + animal.getResumoPet() + "' "
                 + "WHERE cod_animal = " + animal.getCodAnimal();
         
         ConexaoBD.executeUpdate(sql);

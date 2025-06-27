@@ -10,12 +10,12 @@ package modelos;
  */
 public class Usuario {
     
-    private int id;
+    private int codUsuario;
     private String usuario;
     private String senha;
 
     public Usuario(int id, String usuario, String senha) {
-        this.id = id;
+        this.codUsuario = id;
         this.usuario = usuario;
         this.senha = senha;
     }
@@ -25,12 +25,12 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public int getId() {
-        return id;
+    public int getCodUsuario() {
+        return codUsuario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void getCodUsuario(int id) {
+        this.codUsuario = id;
     }
 
     public String getUsuario() {

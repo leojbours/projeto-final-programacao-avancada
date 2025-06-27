@@ -44,7 +44,8 @@ public class PessoaDAO {
     public Pessoa recuperarPessoa(Integer codPessoa) throws SQLException {
         Pessoa pessoa = null;
 
-        String sql = "SELECT * FROM pessoa WHERE cod_pessoa = " + codPessoa;
+        String sql = "SELECT * FROM pessoa WHERE cod_pessoa = " + codPessoa +
+                     " AND ativo = true";
 
         resultadoQ = ConexaoBD.executeQuery(sql);
 

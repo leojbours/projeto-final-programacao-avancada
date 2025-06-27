@@ -43,6 +43,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastros = new javax.swing.JMenu();
         mnuPessoa = new javax.swing.JMenuItem();
         mnuAnimal = new javax.swing.JMenuItem();
+        mnuAdocao = new javax.swing.JMenuItem();
         mnuUsuarios = new javax.swing.JMenuItem();
         menuRelatorios = new javax.swing.JMenu();
         mnuRelatioPessoa = new javax.swing.JMenuItem();
@@ -83,6 +84,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastros.add(mnuAnimal);
+
+        mnuAdocao.setText("Adoção");
+        mnuAdocao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAdocaoActionPerformed(evt);
+            }
+        });
+        menuCadastros.add(mnuAdocao);
 
         mnuUsuarios.setText("Usuários");
         menuCadastros.add(mnuUsuarios);
@@ -135,6 +144,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaPDFPessoa.setVisible(true);
     }//GEN-LAST:event_mnuRelatioPessoaActionPerformed
 
+    private void mnuAdocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAdocaoActionPerformed
+        TelaListagemAdocao telaListagemAdocao = new TelaListagemAdocao();
+        dskPainel.add(telaListagemAdocao);
+        telaListagemAdocao.setVisible(true);
+    }//GEN-LAST:event_mnuAdocaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -178,6 +193,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenu menuRelatorios;
+    private javax.swing.JMenuItem mnuAdocao;
     private javax.swing.JMenuItem mnuAnimal;
     private javax.swing.JMenuItem mnuPessoa;
     private javax.swing.JMenuItem mnuRelatioPessoa;

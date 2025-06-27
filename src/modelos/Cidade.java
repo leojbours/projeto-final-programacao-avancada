@@ -34,8 +34,12 @@ public class Cidade {
         return sb.toString();
     }
 
-    public Integer getCodCidade() {
+    public int getCodCidade() {
         return codCidade;
+    }
+    
+    public void setCodCidade(int id) {
+        this.codCidade = id;
     }
 
     public String getNomeCidade() {

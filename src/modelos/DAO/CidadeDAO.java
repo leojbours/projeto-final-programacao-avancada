@@ -27,7 +27,7 @@ public class CidadeDAO {
                 + cidade.getNomeCidade().toUpperCase() + "', '" 
                 + cidade.getUf().toUpperCase() + "')";
         
-        ConexaoBD.executeUpdate(sql);
+        cidade.setCodCidade(ConexaoBD.executeUpdateReturnId(sql));
     }
 
     public Cidade recuperarCidade(String nome, String uf) throws SQLException {

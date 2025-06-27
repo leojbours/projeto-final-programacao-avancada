@@ -31,7 +31,7 @@ public class EnderecoDAO {
                 + endereco.getComplemento() + "', '"
                 + endereco.getCep() + "')";
 
-        ConexaoBD.executeUpdate(sql);
+        endereco.setCodEndereco(ConexaoBD.executeUpdateReturnId(sql));
     }
 
     public Endereco recuperarEndereco(Endereco endereco) throws SQLException {

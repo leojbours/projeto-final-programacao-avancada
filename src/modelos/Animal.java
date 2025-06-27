@@ -21,6 +21,7 @@ public class Animal {
     private String cor;
     private Character sexo;
     private String localDeEncontro;
+    private String resumoPet;
     
     //Construtor usado para salvar da tela
     public Animal(String tipo, LocalDate dataEncontro, String raca, String cor, Character sexo, String localDeEncontro) {
@@ -33,7 +34,7 @@ public class Animal {
     }
 
     //Construtor para recuperar do banco
-    public Animal(Integer codAnimal, String nome, String tipo, LocalDate dataEncontro, String raca, Integer idade, String cor, Character sexo, String localDeEncontro) {
+    public Animal(Integer codAnimal, String nome, String tipo, LocalDate dataEncontro, String raca, Integer idade, String cor, Character sexo, String localDeEncontro, String resumoPet) {
         this.codAnimal = codAnimal;
         this.nome = nome;
         this.tipo = tipo;
@@ -43,8 +44,21 @@ public class Animal {
         this.cor = cor;
         this.sexo = sexo;
         this.localDeEncontro = localDeEncontro;
+        this.resumoPet = resumoPet;
     }
 
+    private void resumoPet() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(codAnimal).append(" - ");
+        if (nome != null && !nome.isBlank() && !nome.equals("null")) {
+            sb.append(nome).append(". ");
+        }
+        sb.append(tipo).append(", ").append(raca);
+        sb.append(" - ").append(cor);
+        
+        this.resumoPet = sb.toString();
+    }
+    
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -64,6 +78,10 @@ public class Animal {
     
     public Integer getCodAnimal() {
         return codAnimal;
+    }
+    
+    public void setCodAnimal(int id) {
+        this.codAnimal = id;
     }
     
     public String getCor() {
@@ -128,5 +146,12 @@ public class Animal {
 
     public void setLocalDeEncontro(String localDeEncontro) {
         this.localDeEncontro = localDeEncontro;
+    }
+    
+    public String getResumoPet() 
+    {
+        this.resumoPet();
+        
+        return resumoPet;
     }
 }

@@ -7,19 +7,14 @@ package modelos.DAO;
 import apoio.ConexaoBD;
 import java.sql.SQLException;
 import modelos.Cidade;
-import modelos.Cidade;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import modelos.DAO.PessoaDAO;
-import modelos.DefaultParameters;
 import modelos.DefaultParameters;
 import modelos.Endereco;
-import modelos.Endereco;
-import modelos.Pessoa;
 import modelos.Pessoa;
 
 /**
@@ -48,7 +43,8 @@ public class PessoaDAOTest {
             ConexaoBD.executeUpdate(DefaultParameters.Endereco.CREATE_TABLE);
             ConexaoBD.executeUpdate(DefaultParameters.Pessoa.CREATE_TABLE);
         } catch (SQLException e) {
-            throw new RuntimeException("Erro em @BeforeClass: falha ao criar tabelas 'pessoa', 'endereco', 'cidade'.\n" + e.getMessage(), e);
+            throw new RuntimeException(
+            "Erro em @BeforeClass: falha ao criar tabelas 'pessoa', 'endereco', 'cidade'.\n" + e.getMessage(), e);
         }
         
     }
@@ -111,12 +107,6 @@ public class PessoaDAOTest {
         ConexaoBD.getInstance().shutdown();
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-    
     @Test
     public void testInserirERecuperarPessoa() throws SQLException {
         
@@ -131,6 +121,7 @@ public class PessoaDAOTest {
         Endereco e = p.getEndereco();
         Cidade c = e.getCidade();
         
+        // Testa pessoa
         assertEquals(DefaultParameters.Pessoa.COD_PESSOA, (int) p.getCodPessoa());
         assertEquals(pessoa.getCodPessoa(), p.getCodPessoa());
         assertEquals(DefaultParameters.Pessoa.NOME_PESSOA, p.getNomePessoa());
@@ -142,27 +133,57 @@ public class PessoaDAOTest {
         assertEquals(DefaultParameters.Pessoa.NUM_CELULAR, p.getNumCelular());
         assertEquals(DefaultParameters.Pessoa.ESTADO_CIVIL, p.getEstadoCivil());
         
-        
-        // Talvez implementar teste de id do cod_endereco
-        // assertEquals(DefaultParameters.Endereco.COD_ENDERECO, pessoa.getEndereco().getCodEndereco());
+        // Testa endereço
+        assertEquals(DefaultParameters.Endereco.COD_ENDERECO, e.getCodEndereco());
         assertEquals(DefaultParameters.Endereco.CEP, e.getCep());
         assertEquals(DefaultParameters.Endereco.LOGRADOURO, e.getLogradouro());
         assertEquals(DefaultParameters.Endereco.NUMERO, e.getNumero());
         assertEquals(DefaultParameters.Endereco.COMPLEMENTO, e.getComplemento());
         assertEquals(DefaultParameters.Endereco.BAIRRO, e.getBairro());
         
-        // Talvez implementar teste de id do cod_cidade
+        // Testa cidade
+        assertEquals(DefaultParameters.Cidade.COD_CIDADE, c.getCodCidade());
         assertEquals(DefaultParameters.Cidade.NOME_CIDADE, c.getNomeCidade());
         assertEquals(DefaultParameters.Cidade.UF, c.getUf());
-
-        endereco = new Endereco(DefaultParameters.Endereco.COD_ENDERECO,
-                                DefaultParameters.Endereco.CEP,
-                                DefaultParameters.Endereco.LOGRADOURO,
-                                DefaultParameters.Endereco.NUMERO,
-                                DefaultParameters.Endereco.COMPLEMENTO,
-                                DefaultParameters.Endereco.BAIRRO,
-                                cidade );
-        
         
     }
+    
+    @Test
+    public void testDeletarPessoa() throws SQLException { 
+        cidadeDAO.salvar(cidade);
+        enderecoDAO.salvar(endereco);
+        pessoaDAO.salvar(pessoa);
+        
+        Pessoa p = pessoaDAO.recuperarPessoa(pessoa.getCodPessoa());
+        
+        assertNotNull(p);
+        
+        pessoaDAO.deletar(p.getCodPessoa());
+        
+        p = pessoaDAO.recuperarPessoa(p.getCodPessoa());
+        
+        assertNull(p);
+        
+    }
+    
+    @Test
+    public void testEditarPessoa() throws SQLException {
+        
+        cidadeDAO.salvar(cidade);
+        enderecoDAO.salvar(endereco);
+        pessoaDAO.salvar(pessoa);
+        
+        Pessoa p = pessoaDAO.recuperarPessoa(pessoa.getCodPessoa());
+        
+        p.setNomePessoa(DefaultParameters.Pessoa.NOME_EDITADO);
+        p.setCpf(DefaultParameters.Pessoa.CPF_EDITADO);
+        
+        pessoaDAO.editar(p);
+        
+        p = pessoaDAO.recuperarPessoa(p.getCodPessoa());
+        
+        assertEquals(DefaultParameters.Pessoa.NOME_EDITADO, p.getNomePessoa());
+        assertEquals(DefaultParameters.Pessoa.CPF_EDITADO, p.getCpf());
+    }
+    
 }

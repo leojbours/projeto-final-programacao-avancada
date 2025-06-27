@@ -110,6 +110,7 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAdocao = new javax.swing.JTable();
 
+        setClosable(true);
         setMinimumSize(new java.awt.Dimension(655, 507));
         setPreferredSize(new java.awt.Dimension(655, 507));
 

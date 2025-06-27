@@ -4,6 +4,8 @@
  */
 package telas;
 
+import modelos.DAO.CombosDAO;
+
 /**
  *
  * @author leonardo.bourscheid
@@ -15,6 +17,8 @@ public class CadastroAdocao extends javax.swing.JFrame {
      */
     public CadastroAdocao() {
         initComponents();
+        new CombosDAO().popularCombo("pessoa", "cod_pessoa", "nom_pessoa" , cmbAdotante, "");
+        new CombosDAO().popularCombo("animal", "cod_animal", "resumo_pet", cmbPet, "");
     }
 
     /**
@@ -24,21 +28,85 @@ public class CadastroAdocao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblAdotante = new javax.swing.JLabel();
+        lblPet = new javax.swing.JLabel();
+        cmbAdotante = new javax.swing.JComboBox<>();
+        cmbPet = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDevolucao = new javax.swing.JTextArea();
+        lblDevolucao = new javax.swing.JLabel();
+        btnSalvar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        lblAdotante.setText("ADOTANTE:*");
+
+        lblPet.setText("PET:*");
+
+        cmbAdotante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbPet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        txtDevolucao.setColumns(20);
+        txtDevolucao.setRows(5);
+        txtDevolucao.setLineWrap(true);
+
+        txtDevolucao.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(txtDevolucao);
+
+        lblDevolucao.setText("MOTIVO DEVOLUÇÃO:");
+
+        btnSalvar.setText("SALVAR");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSalvar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblAdotante)
+                            .addComponent(lblPet)
+                            .addComponent(cmbAdotante, 0, 262, Short.MAX_VALUE)
+                            .addComponent(cmbPet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDevolucao)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAdotante)
+                .addGap(2, 2, 2)
+                .addComponent(cmbAdotante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPet)
+                .addGap(2, 2, 2)
+                .addComponent(cmbPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDevolucao)
+                .addGap(3, 3, 3)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,5 +145,13 @@ public class CadastroAdocao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cmbAdotante;
+    private javax.swing.JComboBox<String> cmbPet;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAdotante;
+    private javax.swing.JLabel lblDevolucao;
+    private javax.swing.JLabel lblPet;
+    private javax.swing.JTextArea txtDevolucao;
     // End of variables declaration//GEN-END:variables
 }

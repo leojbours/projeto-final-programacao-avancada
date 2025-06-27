@@ -22,6 +22,9 @@ public class DefaultParameters {
         public static final String NUM_CELULAR = "51987654321";
         public static final String ESTADO_CIVIL = "SOLTEIRO";
         
+        public static final String NOME_EDITADO = "LEO2";
+        public static final String CPF_EDITADO = "10987654321";
+        
         public static final String CREATE_TABLE = "CREATE TABLE pessoa ( cod_pessoa SERIAL NOT NULL, "
                                                 + "cod_endereco INT NOT NULL, "
                                                 + "nom_pessoa VARCHAR(255) NOT NULL, "

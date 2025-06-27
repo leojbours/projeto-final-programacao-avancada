@@ -379,9 +379,6 @@ public class CadastroPessoa extends javax.swing.JDialog {
         controlaCidade.salvar(cidade);
         new CombosDAO().popularCombo("cidade", cmbCidade);
 
-        //Coloca recupera a cidade salva do banco, para obter o seu id
-        cidade = controlaCidade.recuperarCidade(cidade.getNomeCidade(), cidade.getUf());
-
         cmbCidade.setSelectedIndex(cidade.getCodCidade());
 
         Endereco endereco = gson.fromJson(response, Endereco.class);

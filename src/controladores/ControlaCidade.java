@@ -38,6 +38,7 @@ public class ControlaCidade {
             for (Cidade c : cidades) {
 
                 if ((cidade.getNomeCidade().toUpperCase().equals(c.getNomeCidade()) && cidade.getUf().toUpperCase().equals(c.getUf()))) {
+                    cidade.setCodCidade(c.getCodCidade());
                     existe = true;
                     break;
                 }
@@ -53,19 +54,6 @@ public class ControlaCidade {
             System.out.println("Erro ao salvar no banco: ");
             e.printStackTrace();
             return false;
-        }
-
-    }
-
-    public Cidade recuperarCidade(String nome, String uf) {
-        Cidade cidade = null;
-
-        try {
-            cidade = cidadeDAO.recuperarCidade(nome, uf);
-            return cidade;
-        } catch (SQLException e) {
-            System.out.println("Erro ao recuperar do banco: " + e.getMessage());
-            return cidade;
         }
 
     }
