@@ -31,7 +31,7 @@ import modelos.Endereco;
 public class CadastroPessoa extends javax.swing.JDialog {
 
     TelaListagemPessoa telaListagemPessoa;
-    ControlaPessoa controlaPessoa = ControlaPessoa.getInstace();
+    ControlaPessoa controlaPessoa = ControlaPessoa.getInstance();
     ControlaCidade controlaCidade = ControlaCidade.getInstance();
     ControlaEndereco controlaEndereco = ControlaEndereco.getInstance();
     Pessoa pessoaEditada = null;

@@ -16,7 +16,7 @@ import modelos.Usuario;
  */
 public class TelaLogin extends javax.swing.JFrame {
 
-    private ControlaUsuario controlaUsuario = ControlaUsuario.getInstace();
+    private ControlaUsuario controlaUsuario = ControlaUsuario.getInstance();
 
     /**
      * Creates new form TelaLogin

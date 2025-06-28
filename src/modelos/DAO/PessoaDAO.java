@@ -12,7 +12,6 @@ import modelos.Endereco;
 import modelos.Pessoa;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import modelos.Cidade;
 
 /**
  *
@@ -22,7 +21,6 @@ public class PessoaDAO {
 
     ResultSet resultadoQ = null;
     EnderecoDAO enderecoDAO = new EnderecoDAO();
-    CidadeDAO cidadeDAO = new CidadeDAO();
 
     public void salvar(Pessoa pessoa) throws SQLException {
 
@@ -41,7 +39,7 @@ public class PessoaDAO {
         pessoa.setCodPessoa(ConexaoBD.executeUpdateReturnId(sql));
     }
 
-    public Pessoa recuperarPessoa(Integer codPessoa) throws SQLException {
+    public Pessoa recuperarPessoa(int codPessoa) throws SQLException {
         Pessoa pessoa = null;
 
         String sql = "SELECT * FROM pessoa WHERE cod_pessoa = " + codPessoa +

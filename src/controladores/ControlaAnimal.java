@@ -37,7 +37,7 @@ public class ControlaAnimal {
 
     }
     
-    public Animal recuperarAnimal(Integer codAnimal) {
+    public Animal recuperarAnimal(int codAnimal) {
         Animal animal = null;
         try {
             animal = animalDAO.recuperarAnimal(codAnimal);

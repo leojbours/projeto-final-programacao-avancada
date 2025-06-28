@@ -19,7 +19,7 @@ import apoio.Formatacao;
  */
 public class TelaListagemPessoa extends javax.swing.JInternalFrame {
 
-    ControlaPessoa controlaPessoa = ControlaPessoa.getInstace();
+    ControlaPessoa controlaPessoa = ControlaPessoa.getInstance();
 
     /**
      * Creates new form TelaListagemPessoa

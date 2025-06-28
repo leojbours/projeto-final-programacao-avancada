@@ -33,7 +33,7 @@ public class AnimalDAO {
         ConexaoBD.executeUpdate(updateResumo);
     }
 
-    public Animal recuperarAnimal(Integer codAnimal) throws SQLException {
+    public Animal recuperarAnimal(int codAnimal) throws SQLException {
         Animal animal = null;
 
         String sql = "SELECT * FROM animal WHERE cod_animal = " + codAnimal;

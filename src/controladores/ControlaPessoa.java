@@ -21,7 +21,7 @@ public class ControlaPessoa {
 
     private static ControlaPessoa instace;
 
-    public static ControlaPessoa getInstace() {
+    public static ControlaPessoa getInstance() {
         if (instace == null) {
             instace = new ControlaPessoa();
         }
@@ -38,7 +38,7 @@ public class ControlaPessoa {
         }
     }
     
-    public Pessoa recuperarPessoa(Integer codPessoa) {
+    public Pessoa recuperarPessoa(int codPessoa) {
         Pessoa pessoa = null;
         
         try {

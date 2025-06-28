@@ -4,7 +4,13 @@
  */
 package telas;
 
+import controladores.ControlaAdocao;
+import controladores.ControlaAnimal;
+import controladores.ControlaPessoa;
+import modelos.Adocao;
+import modelos.Animal;
 import modelos.DAO.CombosDAO;
+import modelos.Pessoa;
 
 /**
  *
@@ -12,6 +18,10 @@ import modelos.DAO.CombosDAO;
  */
 public class CadastroAdocao extends javax.swing.JFrame {
 
+    ControlaAdocao controlaAdocao = ControlaAdocao.getInstance();
+    ControlaPessoa controlaPessoa = ControlaPessoa.getInstance();
+    ControlaAnimal controlaAnimal = ControlaAnimal.getInstance();
+    
     /**
      * Creates new form TelaCadastroAdocao
      */
@@ -105,7 +115,17 @@ public class CadastroAdocao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+
+        int codPessoa = cmbAdotante.getSelectedIndex();
+        int codAnimal  = cmbPet.getSelectedIndex();
+
+        Pessoa p = controlaPessoa.recuperarPessoa(codPessoa);
+        Animal a = controlaAnimal.recuperarAnimal(codAnimal);
+        
+        Adocao adocao = new Adocao(p, a, Adocao.Status.PENDENTE);
+        
+        controlaAdocao.salvar(adocao);
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**

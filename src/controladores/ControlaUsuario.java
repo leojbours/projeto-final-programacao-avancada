@@ -20,7 +20,7 @@ public class ControlaUsuario {
 
     private static ControlaUsuario instace;
 
-    public static ControlaUsuario getInstace() {
+    public static ControlaUsuario getInstance() {
         if (instace == null) {
             instace = new ControlaUsuario();
         }

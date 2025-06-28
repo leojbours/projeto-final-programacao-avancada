@@ -5,14 +5,15 @@
 package telas;
 
 import apoio.Formatacao;
+import controladores.ControlaAdocao;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
+import modelos.Adocao;
 
 import modelos.Pessoa;
-import controladores.ControlaPessoa;
 
 /**
  *
@@ -20,18 +21,19 @@ import controladores.ControlaPessoa;
  */
 public class TelaListagemAdocao extends javax.swing.JInternalFrame {
 
-    ControlaPessoa controlaPessoa = ControlaPessoa.getInstace();
+    ControlaAdocao controlaAdocao = ControlaAdocao.getInstance();
     
     /**
      * Creates new form TelaListagemAdocao
      */
     public TelaListagemAdocao() {
         initComponents();
+        montaTabela();
     }
 
     protected final void montaTabela() {
-        ArrayList<Pessoa> pessoas = controlaPessoa.recuperarTudo();
-        if (pessoas == null) {
+        ArrayList<Adocao> adocoes = controlaAdocao.recuperarTodos();
+        if (adocoes == null) {
             JOptionPane.showMessageDialog(this, "Erro, não foi possivel recuperar");
         } else {
             tblAdocao.setModel(new AbstractTableModel() {
@@ -39,15 +41,15 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
                 public String getColumnName(int column) {
                     switch (column) {
                         case 0:
-                            return "CÓDIGO";
+                            return "ID";
                         case 1:
-                            return "NOME";
+                            return "PESSOA";
                         case 2:
-                            return "ENDERECO";
+                            return "ANIMAL";
                         case 3:
-                            return "DOCUMENTO";
+                            return "STATUS";
                         case 4:
-                            return "NASCIMENTO";
+                            return "DATA ADOCAO";
                         default:
                             return "";
                     }
@@ -60,26 +62,27 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
 
                 @Override
                 public int getRowCount() {
-                    return pessoas.size();
+                    return adocoes.size();
                 }
 
                 @Override
                 public Object getValueAt(int rowIndex, int columnIndex) {
-                    Pessoa pessoa = pessoas.get(rowIndex);
-                    pessoas.forEach(Pessoa::defineDocumento);
+                    Adocao adocao = adocoes.get(rowIndex);
 
-                    if (pessoa != null) {
+                    boolean validaData = !(adocao.getDataAdocao() == null);
+                    
+                    if (adocao != null) {
                         switch (columnIndex) {
                             case 0:
-                                return pessoa.getCodPessoa();
+                                return adocao.getCodAdocao();
                             case 1:
-                                return pessoa.getNomePessoa();
+                                return adocao.getPessoa().getNomePessoa();
                             case 2:
-                                return pessoa.getEndereco().escreveEndereco();
+                                return adocao.getAnimal().getResumoPet();
                             case 3:
-                                return pessoa.getDocumento();
+                                return adocao.getStatus().getNome();
                             case 4:
-                                return pessoa.getDataNascimento().format(Formatacao.FORMATO_1);
+                                return validaData ? adocao.getDataAdocao() : "";
                         }
 
                     }
@@ -88,11 +91,11 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
                 }
             });
 
-            tblAdocao.getColumnModel().getColumn(0).setMinWidth(65);
+            tblAdocao.getColumnModel().getColumn(0).setMinWidth(35);
             tblAdocao.getColumnModel().getColumn(1).setMinWidth(180);
             tblAdocao.getColumnModel().getColumn(2).setMinWidth(180);
             tblAdocao.getColumnModel().getColumn(0).setPreferredWidth(80);
-            tblAdocao.getColumnModel().getColumn(0).setMaxWidth(20);
+            tblAdocao.getColumnModel().getColumn(0).setMaxWidth(40);
         }
     }
     
