@@ -36,7 +36,7 @@ public class CadastroAnimal extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.telaListagemAnimal = tl;
-        this.animalEditado = controlaAnimal.recuperarAnimal(codAnimal);
+        this.animalEditado = controlaAnimal.recuperarAnimal((int) codAnimal);
 
         txtTipoAnimal.setText(animalEditado.getTipo());
         txtDataEncontro.setText(animalEditado.getDataEncontro().format(FORMATO_1));

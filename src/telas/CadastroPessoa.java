@@ -60,7 +60,7 @@ public class CadastroPessoa extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.telaListagemPessoa = tl;
-        this.pessoaEditada = controlaPessoa.recuperarPessoa(codPessoa);
+        this.pessoaEditada = controlaPessoa.recuperarPessoa((int)codPessoa);
         new CombosDAO().popularCombo("cidade", cmbCidade);
         //Define mascaras de campos
         Formatacao.formatarCpf(txtCpf);
@@ -136,11 +136,6 @@ public class CadastroPessoa extends javax.swing.JDialog {
         jLabel6.setText("Cidade:*");
 
         cmbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCidadeActionPerformed(evt);
-            }
-        });
 
         lblNomePessoa.setText("Nome:*");
 
@@ -363,10 +358,6 @@ public class CadastroPessoa extends javax.swing.JDialog {
     private void txtBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBairroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBairroActionPerformed
-
-    private void cmbCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbCidadeActionPerformed
 
     private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
 

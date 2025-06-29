@@ -145,7 +145,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuRelatioPessoaActionPerformed
 
     private void mnuAdocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAdocaoActionPerformed
-        TelaListagemAdocao telaListagemAdocao = new TelaListagemAdocao();
+        TelaListagemAdocao telaListagemAdocao = TelaListagemAdocao.getInstance();
         dskPainel.add(telaListagemAdocao);
         telaListagemAdocao.setVisible(true);
     }//GEN-LAST:event_mnuAdocaoActionPerformed

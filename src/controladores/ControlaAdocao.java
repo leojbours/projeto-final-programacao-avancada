@@ -56,7 +56,7 @@ public class ControlaAdocao {
         Adocao adocao = null;
         
         try {
-            adocaoDAO.recuperarPorId(id);
+            adocao = adocaoDAO.recuperarPorId(id);
         } catch (SQLException e) {
             System.out.println("Erro ao recuperar adocao: " + e.getMessage());
         }
@@ -64,11 +64,25 @@ public class ControlaAdocao {
         return adocao;
     }
     
-    public boolean excluir(int id) {
+    public boolean editar (Adocao adocao) {
         boolean deuCerto;
         
         try {
-            adocaoDAO.excluir(id);
+            adocaoDAO.editar(adocao);
+            deuCerto = true;
+        } catch (SQLException e) {
+            System.out.println("Erro ao editar adocao: " + e.getMessage());
+            deuCerto = false;
+        }
+        
+        return deuCerto;
+    }
+    
+    public boolean deletar(int id) {
+        boolean deuCerto;
+        
+        try {
+            adocaoDAO.deletar(id);
             deuCerto = true;
         } catch (SQLException e) {
             System.out.println("Erro ao excluir adocao: " + e.getMessage());

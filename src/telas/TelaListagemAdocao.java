@@ -6,6 +6,7 @@ package telas;
 
 import apoio.Formatacao;
 import controladores.ControlaAdocao;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -20,8 +21,10 @@ import modelos.Pessoa;
  * @author leonardo.bourscheid
  */
 public class TelaListagemAdocao extends javax.swing.JInternalFrame {
-
+    
     ControlaAdocao controlaAdocao = ControlaAdocao.getInstance();
+    
+    private static TelaListagemAdocao instance = null;
     
     /**
      * Creates new form TelaListagemAdocao
@@ -30,8 +33,15 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
         initComponents();
         montaTabela();
     }
+    
+    public static TelaListagemAdocao getInstance() {
+        if (instance == null) {
+            instance = new TelaListagemAdocao();
+        }
+        return instance;
+    }
 
-    protected final void montaTabela() {
+    public final void montaTabela() {
         ArrayList<Adocao> adocoes = controlaAdocao.recuperarTodos();
         if (adocoes == null) {
             JOptionPane.showMessageDialog(this, "Erro, não foi possivel recuperar");
@@ -107,11 +117,12 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnCadastra = new javax.swing.JButton();
-        btnAtualiza = new javax.swing.JButton();
+        btnConfirma = new javax.swing.JButton();
         btnEdita = new javax.swing.JButton();
         btnDeleta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAdocao = new javax.swing.JTable();
+        btnDevolve = new javax.swing.JButton();
 
         setClosable(true);
         setMinimumSize(new java.awt.Dimension(655, 507));
@@ -124,10 +135,10 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
             }
         });
 
-        btnAtualiza.setText("ATUALIZA");
-        btnAtualiza.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirma.setText("CONFIRMA");
+        btnConfirma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtualizaActionPerformed(evt);
+                btnConfirmaActionPerformed(evt);
             }
         });
 
@@ -158,6 +169,13 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblAdocao);
 
+        btnDevolve.setText("DEVOLVE");
+        btnDevolve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,7 +187,9 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCadastra)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAtualiza)
+                        .addComponent(btnConfirma)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDevolve)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEdita)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -185,9 +205,10 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastra)
-                    .addComponent(btnAtualiza)
+                    .addComponent(btnConfirma)
                     .addComponent(btnEdita)
-                    .addComponent(btnDeleta))
+                    .addComponent(btnDeleta)
+                    .addComponent(btnDevolve))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -196,25 +217,36 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
 
     private void btnCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraActionPerformed
         JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
-        CadastroAdocao telaCadastroAdocao = new CadastroAdocao();
+        CadastroAdocao telaCadastroAdocao = new CadastroAdocao(telaAnterior, true);
         telaCadastroAdocao.setLocationRelativeTo(telaAnterior);
         telaCadastroAdocao.setVisible(true);
     }//GEN-LAST:event_btnCadastraActionPerformed
 
-    private void btnAtualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizaActionPerformed
-        montaTabela();
-    }//GEN-LAST:event_btnAtualizaActionPerformed
+    private void btnConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmaActionPerformed
+        int codAdocao = recuperaIdTabela();
+        
+        if (codAdocao == -1) {
+            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
+        } else if (controlaAdocao.recuperarPorId(codAdocao).getStatus().equals(Adocao.Status.PENDENTE)) {
+            Adocao adocao = controlaAdocao.recuperarPorId(codAdocao);
+            adocao.setStatus(Adocao.Status.CONFIRMADO);
+            adocao.setDataAdocao(LocalDate.now());
+            controlaAdocao.editar(adocao);
+            montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(this, "ESSA ADOÇAO NAO PODE SER CONFIRMADA!");
+        }
+    }//GEN-LAST:event_btnConfirmaActionPerformed
 
     private void btnEditaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaActionPerformed
 
-        if (tblAdocao.getSelectedRow() == -1) {
+        int codAdocao = recuperaIdTabela();
+        
+        if (codAdocao == -1) {
             JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
         } else {
-            String codAnimalString = String.valueOf(tblAdocao.getValueAt(tblAdocao.getSelectedRow(), 0));
-            Integer codAnimal = Integer.valueOf(codAnimalString);
-
             JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
-            CadastroAdocao telaCadastroAdocao = new CadastroAdocao();
+            CadastroAdocao telaCadastroAdocao = new CadastroAdocao(telaAnterior, true, controlaAdocao.recuperarPorId(codAdocao));
             telaCadastroAdocao.setLocationRelativeTo(telaAnterior);
             telaCadastroAdocao.setVisible(true);
         }
@@ -222,34 +254,57 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
 
     private void btnDeletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletaActionPerformed
 
-//        if (tblAdocao.getSelectedRow() == -1) {
-//            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
-//        } else {
-//            String codAnimalString = String.valueOf(tblAdocao.getValueAt(tblAdocao.getSelectedRow(), 0));
-//            Integer codAnimal = Integer.valueOf(codAnimalString);
-//
-//            int confirmacao = JOptionPane.showConfirmDialog(this, "TEM CERTEZA QUE DESEJA DELETAR?");
-//
-//            if (confirmacao == 0) {
-//                boolean deuCerto = controlaAdocao.deletar(codAnimal);
-//                if (deuCerto) {
-//                    JOptionPane.showMessageDialog(this, "DELETADO COM SUCESSO");
-//                    montaTabela();
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "FALHA AO DELETAR, TENTE NOVAMENTE");
-//                    montaTabela();
-//                }
-//
-//            }
-//
-//        }
+        int codAdocao = recuperaIdTabela();
+        
+        if (codAdocao == -1) {
+            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
+        } else {
+            int confirmacao = JOptionPane.showConfirmDialog(this, "TEM CERTEZA QUE DESEJA DELETAR?");
+
+            if (confirmacao == 0) {
+                boolean deuCerto = controlaAdocao.deletar(codAdocao);
+                if (deuCerto) {
+                    JOptionPane.showMessageDialog(this, "DELETADO COM SUCESSO");
+                    montaTabela();
+                } else {
+                    JOptionPane.showMessageDialog(this, "FALHA AO DELETAR, TENTE NOVAMENTE");
+                    montaTabela();
+                }
+
+            }
+
+        }
     }//GEN-LAST:event_btnDeletaActionPerformed
 
+    private void btnDevolveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolveActionPerformed
+
+        int codAdocao = recuperaIdTabela();
+
+        if (codAdocao == -1) {
+            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
+        } else if (controlaAdocao.recuperarPorId(codAdocao).getStatus().equals(Adocao.Status.CONFIRMADO)) {
+            JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
+            CadastroAdocao telaCadastroAdocao = new CadastroAdocao(telaAnterior, true, controlaAdocao.recuperarPorId(codAdocao));
+            telaCadastroAdocao.setLocationRelativeTo(telaAnterior);
+            telaCadastroAdocao.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "ESSA ADOÇAO NAO PODE SER DEVOLVIDA!");
+        }
+        
+    }//GEN-LAST:event_btnDevolveActionPerformed
+
+    private int recuperaIdTabela() {
+        String idString = String.valueOf(tblAdocao.getValueAt(tblAdocao.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+        
+        return id;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtualiza;
     private javax.swing.JButton btnCadastra;
+    private javax.swing.JButton btnConfirma;
     private javax.swing.JButton btnDeleta;
+    private javax.swing.JButton btnDevolve;
     private javax.swing.JButton btnEdita;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblAdocao;

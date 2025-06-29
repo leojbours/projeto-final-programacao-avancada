@@ -35,7 +35,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnCadastra" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnAtualiza" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnConfirma" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnDevolve" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnEdita" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -55,9 +57,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCadastra" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAtualiza" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnConfirma" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEdita" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnDeleta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDevolve" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="9" max="32767" attributes="0"/>
           </Group>
@@ -73,12 +76,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastraActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAtualiza">
+    <Component class="javax.swing.JButton" name="btnConfirma">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ATUALIZA"/>
+        <Property name="text" type="java.lang.String" value="CONFIRMA"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtualizaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnEdita">
@@ -118,5 +121,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnDevolve">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="DEVOLVE"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDevolveActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
