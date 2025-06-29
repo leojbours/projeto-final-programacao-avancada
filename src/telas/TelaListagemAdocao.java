@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 import modelos.Adocao;
+import static modelos.Adocao.Status.CONFIRMADO;
+import static modelos.Adocao.Status.DEVOLVIDO;
 
 import modelos.Pessoa;
 
@@ -223,46 +225,68 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCadastraActionPerformed
 
     private void btnConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmaActionPerformed
-        int codAdocao = recuperaIdTabela();
+        Adocao adocao = recuperaAdocaoTabela(recuperaIdTabela());
         
-        if (codAdocao == -1) {
-            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
-        } else if (controlaAdocao.recuperarPorId(codAdocao).getStatus().equals(Adocao.Status.PENDENTE)) {
-            Adocao adocao = controlaAdocao.recuperarPorId(codAdocao);
-            adocao.setStatus(Adocao.Status.CONFIRMADO);
-            adocao.setDataAdocao(LocalDate.now());
-            controlaAdocao.editar(adocao);
-            montaTabela();
-        } else {
-            JOptionPane.showMessageDialog(this, "ESSA ADOÇAO NAO PODE SER CONFIRMADA!");
+        if (adocao != null && adocao.getStatus().equals(Adocao.Status.PENDENTE)) {
+            int confirmacao = JOptionPane.showConfirmDialog(this, "DESEJA MESMO CONFIRMAR ESSA ADOCAO?");
+            
+            if (confirmacao == 0) {
+                adocao.setStatus(Adocao.Status.CONFIRMADO);
+                adocao.setDataAdocao(LocalDate.now());
+
+                boolean deuCerto = controlaAdocao.editar(adocao);
+
+                if (deuCerto) {
+                    JOptionPane.showMessageDialog(this, "ADOCAO CONFIRMADA COM SUCESSO!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "ERRO AO CONFIRMAR ADOCAO, TENTE NOVAMENTE!");
+                }
+
+                montaTabela();
+            }
+            
+        } else if (adocao != null) {
+            switch (adocao.getStatus()) {
+                case CONFIRMADO -> {
+                    JOptionPane.showMessageDialog(this, "ESTA ADOCAO JA FOI CONFIRMADA!");
+                }
+                
+                case DEVOLVIDO -> {
+                    JOptionPane.showMessageDialog(this, "NAO E POSSIVEL CONFIRMAR UMA ADOCAO DEVOLVIDA!");
+                }
+            }
         }
     }//GEN-LAST:event_btnConfirmaActionPerformed
 
     private void btnEditaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaActionPerformed
-
-        int codAdocao = recuperaIdTabela();
+        Adocao adocao = recuperaAdocaoTabela(recuperaIdTabela());
         
-        if (codAdocao == -1) {
-            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
-        } else {
+        if (adocao != null && adocao.getStatus().equals(Adocao.Status.PENDENTE)) {
             JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
-            CadastroAdocao telaCadastroAdocao = new CadastroAdocao(telaAnterior, true, controlaAdocao.recuperarPorId(codAdocao));
+            CadastroAdocao telaCadastroAdocao = new CadastroAdocao(telaAnterior, true, adocao);
             telaCadastroAdocao.setLocationRelativeTo(telaAnterior);
             telaCadastroAdocao.setVisible(true);
+        } else if (adocao != null) {
+            switch (adocao.getStatus()) {
+                case CONFIRMADO -> {
+                    JOptionPane.showMessageDialog(this, "NAO E POSSIVEL EDITAR UMA ADOCAO CONFIRMADA!");
+                }
+                
+                case DEVOLVIDO -> {
+                    JOptionPane.showMessageDialog(this, "NAO E POSSIVEL EDITAR UMA ADOCAO DEVOLVIDA!");
+                }
+            }
         }
     }//GEN-LAST:event_btnEditaActionPerformed
 
     private void btnDeletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletaActionPerformed
-
-        int codAdocao = recuperaIdTabela();
+        Adocao adocao = recuperaAdocaoTabela(recuperaIdTabela());
         
-        if (codAdocao == -1) {
-            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
-        } else {
+        if (adocao != null && adocao.getStatus().equals(Adocao.Status.PENDENTE)) {
             int confirmacao = JOptionPane.showConfirmDialog(this, "TEM CERTEZA QUE DESEJA DELETAR?");
 
             if (confirmacao == 0) {
-                boolean deuCerto = controlaAdocao.deletar(codAdocao);
+                boolean deuCerto = controlaAdocao.deletar(adocao.getCodAdocao());
                 if (deuCerto) {
                     JOptionPane.showMessageDialog(this, "DELETADO COM SUCESSO");
                     montaTabela();
@@ -273,22 +297,37 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
 
             }
 
+        } else if (adocao != null) {
+            switch (adocao.getStatus()) {
+                case CONFIRMADO -> {
+                    JOptionPane.showMessageDialog(this, "NAO E POSSIVEL DELETAR UMA ADOCAO CONFIRMADA!");
+                }
+                
+                case DEVOLVIDO -> {
+                    JOptionPane.showMessageDialog(this, "NAO E POSSIVEL DELETAR UMA ADOCAO DEVOLVIDA!");
+                }
+            }
         }
     }//GEN-LAST:event_btnDeletaActionPerformed
 
     private void btnDevolveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolveActionPerformed
-
-        int codAdocao = recuperaIdTabela();
-
-        if (codAdocao == -1) {
-            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
-        } else if (controlaAdocao.recuperarPorId(codAdocao).getStatus().equals(Adocao.Status.CONFIRMADO)) {
+        Adocao adocao = recuperaAdocaoTabela(recuperaIdTabela());
+        
+        if (adocao != null && adocao.getStatus().equals(Adocao.Status.CONFIRMADO)) {
             JFrame telaAnterior = (JFrame) SwingUtilities.getWindowAncestor(this);
-            CadastroAdocao telaCadastroAdocao = new CadastroAdocao(telaAnterior, true, controlaAdocao.recuperarPorId(codAdocao));
+            CadastroAdocao telaCadastroAdocao = new CadastroAdocao(telaAnterior, true, adocao);
             telaCadastroAdocao.setLocationRelativeTo(telaAnterior);
             telaCadastroAdocao.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "ESSA ADOÇAO NAO PODE SER DEVOLVIDA!");
+        } else if (adocao != null) {
+            switch (adocao.getStatus()) {
+                case PENDENTE -> {
+                    JOptionPane.showMessageDialog(this, "ESSA ADOCAO AINDA NAO FOI CONFIRMADA!");
+                }
+                
+                case DEVOLVIDO -> {
+                    JOptionPane.showMessageDialog(this, "ESSA ADOCAO JA FOI DEVOLVIDA!");
+                }
+            }
         }
         
     }//GEN-LAST:event_btnDevolveActionPerformed
@@ -298,6 +337,18 @@ public class TelaListagemAdocao extends javax.swing.JInternalFrame {
         int id = Integer.parseInt(idString);
         
         return id;
+    }
+    
+    private Adocao recuperaAdocaoTabela(int codAdocao) {
+        Adocao adocao = null;
+        
+        if (codAdocao == -1) {
+            JOptionPane.showMessageDialog(this, "SÓ ESQUECEU DE SELECIONAR NÉ IDIOTA");
+        } else {
+            adocao = controlaAdocao.recuperarPorId(codAdocao);
+        }
+        
+        return adocao;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

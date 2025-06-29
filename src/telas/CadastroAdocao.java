@@ -10,6 +10,8 @@ import controladores.ControlaPessoa;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import modelos.Adocao;
+import static modelos.Adocao.Status.CONFIRMADO;
+import static modelos.Adocao.Status.PENDENTE;
 import modelos.Animal;
 import modelos.ComboItem;
 import modelos.DAO.CombosDAO;
@@ -162,7 +164,39 @@ public class CadastroAdocao extends javax.swing.JDialog {
                 adocaoEditada.setStatus(Adocao.Status.DEVOLVIDO);
             }
 
-            controlaAdocao.editar(adocaoEditada);
+            boolean deuCerto = controlaAdocao.editar(adocaoEditada);
+            
+            if (deuCerto) {
+                
+                switch (adocaoEditada.getStatus()) {
+                    
+                    case PENDENTE -> {
+                        JOptionPane.showMessageDialog(this, "EDITADO COM SUCESSO!");
+                    }
+                    
+                    case CONFIRMADO -> {
+                        JOptionPane.showMessageDialog(this, "DEVOLVIDO COM SUCESSO!");
+                    }
+                    
+                }
+                
+                this.dispose();
+            }
+            
+            else {
+                
+                switch (adocaoEditada.getStatus()) {
+                    
+                    case PENDENTE -> {
+                        JOptionPane.showMessageDialog(this, "ERRO AO EDITAR, TENTE NOVAMENTE!");
+                    }
+                    
+                    case CONFIRMADO -> {
+                        JOptionPane.showMessageDialog(this, "ERRO AO DEVOLVER, TENTE NOVAMENTE!");
+                    }
+                    
+                }
+            }
 
         } else {
 
