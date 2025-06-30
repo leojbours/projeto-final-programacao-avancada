@@ -46,7 +46,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         mnuAdocao = new javax.swing.JMenuItem();
         mnuUsuarios = new javax.swing.JMenuItem();
         menuRelatorios = new javax.swing.JMenu();
-        mnuRelatioPessoa = new javax.swing.JMenuItem();
+        mnuPessoasPDF = new javax.swing.JMenuItem();
+        mnuAnimaisPDF = new javax.swing.JMenuItem();
 
         jMenu2.setText("File");
         jMenuBar2.add(jMenu2);
@@ -100,13 +101,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuRelatorios.setText("Relatorios");
 
-        mnuRelatioPessoa.setText("Pessoas Cadastradas");
-        mnuRelatioPessoa.addActionListener(new java.awt.event.ActionListener() {
+        mnuPessoasPDF.setText("Pessoas Cadastradas");
+        mnuPessoasPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuRelatioPessoaActionPerformed(evt);
+                mnuPessoasPDFActionPerformed(evt);
             }
         });
-        menuRelatorios.add(mnuRelatioPessoa);
+        menuRelatorios.add(mnuPessoasPDF);
+
+        mnuAnimaisPDF.setText("Animais Cadastrados");
+        mnuAnimaisPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAnimaisPDFActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(mnuAnimaisPDF);
 
         barraMenu.add(menuRelatorios);
 
@@ -138,17 +147,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaListagemAnimal.setVisible(true);
     }//GEN-LAST:event_mnuAnimalActionPerformed
 
-    private void mnuRelatioPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRelatioPessoaActionPerformed
+    private void mnuPessoasPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPessoasPDFActionPerformed
         TelaPDFPessoa telaPDFPessoa = new TelaPDFPessoa();
         dskPainel.add(telaPDFPessoa);
         telaPDFPessoa.setVisible(true);
-    }//GEN-LAST:event_mnuRelatioPessoaActionPerformed
+    }//GEN-LAST:event_mnuPessoasPDFActionPerformed
 
     private void mnuAdocaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAdocaoActionPerformed
         TelaListagemAdocao telaListagemAdocao = TelaListagemAdocao.getInstance();
         dskPainel.add(telaListagemAdocao);
         telaListagemAdocao.setVisible(true);
     }//GEN-LAST:event_mnuAdocaoActionPerformed
+
+    private void mnuAnimaisPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAnimaisPDFActionPerformed
+        TelaPDFAnimal telaPDFAnimal = new TelaPDFAnimal();
+        dskPainel.add(telaPDFAnimal);
+        telaPDFAnimal.setVisible(true);
+    }//GEN-LAST:event_mnuAnimaisPDFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,9 +209,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuCadastros;
     private javax.swing.JMenu menuRelatorios;
     private javax.swing.JMenuItem mnuAdocao;
+    private javax.swing.JMenuItem mnuAnimaisPDF;
     private javax.swing.JMenuItem mnuAnimal;
     private javax.swing.JMenuItem mnuPessoa;
-    private javax.swing.JMenuItem mnuRelatioPessoa;
+    private javax.swing.JMenuItem mnuPessoasPDF;
     private javax.swing.JMenuItem mnuUsuarios;
     // End of variables declaration//GEN-END:variables
 }

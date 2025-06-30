@@ -63,12 +63,20 @@
             <Property name="text" type="java.lang.String" value="Relatorios"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnuRelatioPessoa">
+            <MenuItem class="javax.swing.JMenuItem" name="mnuPessoasPDF">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pessoas Cadastradas"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuRelatioPessoaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuPessoasPDFActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuAnimaisPDF">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Animais Cadastrados"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuAnimaisPDFActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
