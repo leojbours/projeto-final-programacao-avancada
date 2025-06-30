@@ -6,7 +6,6 @@ package main;
 
 import apoio.ConexaoBD;
 import javax.swing.JOptionPane;
-import telas.TelaPrincipal;
 import telas.TelaLogin;
 
 /**
@@ -16,6 +15,7 @@ import telas.TelaLogin;
 public class Main {
 
     public static void main(String[] args) {
+        
         try {
             //Faz conexao com o banco de dados
             ConexaoBD.getInstance().getConnection();

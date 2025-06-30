@@ -14,7 +14,7 @@ public class Pessoa {
     private int codPessoa;
     private String nomePessoa;
     private String cpf;
-    private String passsaporte;
+    private String passaporte;
     private String documento;
     private LocalDate dataNascimento;
     private Character sexo;
@@ -23,11 +23,11 @@ public class Pessoa {
 
     private Endereco endereco;
 
-    public Pessoa(int codPessoa, String nomePessoa, String cpf, String passsaporte, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, Endereco endereco) {
+    public Pessoa(int codPessoa, String nomePessoa, String cpf, String passaporte, LocalDate dataNascimento, Character sexo, String numCelular, String estadoCivil, Endereco endereco) {
         this.codPessoa = codPessoa;
         this.nomePessoa = nomePessoa;
         this.cpf = cpf;
-        this.passsaporte = passsaporte;
+        this.passaporte = passaporte;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.numCelular = numCelular;
@@ -46,18 +46,26 @@ public class Pessoa {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(codPessoa).append(";");
-        sb.append(nomePessoa).append(";");
-        sb.append(cpf).append(";");
-        sb.append(passsaporte).append(";");
-        sb.append(dataNascimento).append(";");
-        sb.append(sexo).append(";");
-        sb.append(numCelular).append(";");
-        sb.append(estadoCivil).append(";");
-        sb.append(endereco).append(";");
-        return sb.toString();
+        return codPessoa                              + ";" 
+               + nomePessoa                           + ";"
+               + cpf                                  + ";"
+               + passaporte                           + ";"
+               + getDocumento()                       + ";"
+               + dataNascimento                       + ";"
+               + sexo                                 + ";"
+               + numCelular                           + ";"
+               + estadoCivil                          + ";"
+               + endereco.getCodEndereco()            + ";"
+               + endereco.getLogradouro()             + ";"
+               + endereco.getBairro()                 + ";"
+               + endereco.getCep()                    + ";"
+               + endereco.getComplemento()            + ";"
+               + endereco.getNumero()                 + ";"
+               + endereco.getCidade().getCodCidade()  + ";"
+               + endereco.getCidade().getNomeCidade() + ";"
+               + endereco.getCidade().getUf();
     }
+
 
     public String imprimeAtributos() {
         StringBuilder sb = new StringBuilder();
@@ -65,7 +73,7 @@ public class Pessoa {
         sb.append("codPessoa: ").append(codPessoa).append("\n");
         sb.append("nomePessoa: ").append(nomePessoa).append("\n");
         sb.append("cpf: ").append(cpf).append("\n");
-        sb.append("passsaporte: ").append(passsaporte).append("\n");
+        sb.append("passaporte: ").append(passaporte).append("\n");
         sb.append("dataNascimento: ").append(dataNascimento).append("\n");
         sb.append("sexo: ").append(sexo).append("\n");
         sb.append("numCelular: ").append(numCelular).append("\n");
@@ -115,11 +123,11 @@ public class Pessoa {
     }
 
     public String getPasssaporte() {
-        return passsaporte;
+        return passaporte;
     }
 
-    public void setPasssaporte(String passsaporte) {
-        this.passsaporte = passsaporte;
+    public void setPasssaporte(String passaporte) {
+        this.passaporte = passaporte;
     }
 
     public String getDocumento() {
@@ -133,7 +141,7 @@ public class Pessoa {
 
     public void defineDocumento() {
         if (cpf == null || cpf.trim().equals("null") || cpf.isBlank()) {
-            this.documento = this.passsaporte;
+            this.documento = this.passaporte;
         } else {
             this.documento = this.cpf;
         }

@@ -84,4 +84,33 @@ public class PessoaTest {
         pessoa.defineDocumento();
         assertEquals(DefaultParameters.Pessoa.CPF, pessoa.getDocumento());
     }
+    
+    @Test
+    public void testaToString() {
+        
+        String esperado = ""
+               + DefaultParameters.Pessoa.COD_PESSOA      + ";" 
+               + DefaultParameters.Pessoa.NOME_PESSOA     + ";"
+               + DefaultParameters.Pessoa.CPF             + ";"
+               + DefaultParameters.Pessoa.PASSAPORTE      + ";"
+               + DefaultParameters.Pessoa.CPF             + ";"
+               + DefaultParameters.Pessoa.DATA_NASCIMENTO + ";"
+               + DefaultParameters.Pessoa.SEXO            + ";"
+               + DefaultParameters.Pessoa.NUM_CELULAR     + ";"
+               + DefaultParameters.Pessoa.ESTADO_CIVIL    + ";"
+               + DefaultParameters.Endereco.COD_ENDERECO  + ";"
+               + DefaultParameters.Endereco.LOGRADOURO    + ";"
+               + DefaultParameters.Endereco.BAIRRO        + ";"
+               + DefaultParameters.Endereco.CEP           + ";"
+               + DefaultParameters.Endereco.COMPLEMENTO   + ";"
+               + DefaultParameters.Endereco.NUMERO        + ";"
+               + DefaultParameters.Cidade.COD_CIDADE      + ";"
+               + DefaultParameters.Cidade.NOME_CIDADE     + ";"
+               + endereco.getCidade().getUf();
+        
+        String resultado = pessoa.toString();
+        
+        assertEquals(esperado, resultado);
+        
+    }
 }

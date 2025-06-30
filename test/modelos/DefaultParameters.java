@@ -13,14 +13,14 @@ import java.time.LocalDate;
 public class DefaultParameters {
     
     public static final class Pessoa {
-        public static final int COD_PESSOA = 1;
-        public static final String NOME_PESSOA = "LEO";
-        public static final String CPF = "12345678910";
-        public static final String PASSAPORTE = "ABC1234";
+        public static final int       COD_PESSOA = 1;
+        public static final String    NOME_PESSOA = "LEO";
+        public static final String    CPF = "12345678910";
+        public static final String    PASSAPORTE = "ABC1234";
         public static final LocalDate DATA_NASCIMENTO = LocalDate.parse("2005-09-15");
         public static final Character SEXO = 'M';
-        public static final String NUM_CELULAR = "51987654321";
-        public static final String ESTADO_CIVIL = "SOLTEIRO";
+        public static final String    NUM_CELULAR = "51987654321";
+        public static final String    ESTADO_CIVIL = "SOLTEIRO";
         
         public static final String NOME_EDITADO = "LEO2";
         public static final String CPF_EDITADO = "10987654321";
@@ -60,7 +60,7 @@ public class DefaultParameters {
     }
     
     public static final class Endereco {
-        public static final int COD_ENDERECO = 1;
+        public static final int    COD_ENDERECO = 1;
         public static final String CEP = "95915000";
         public static final String LOGRADOURO = "AVENIDA 28 DE MAIO";
         public static final String NUMERO = "S/N";
@@ -80,5 +80,22 @@ public class DefaultParameters {
         public static final String TRUNCATE_TABLE = "TRUNCATE TABLE endereco RESTART IDENTITY CASCADE;";
         
         public static final String DROP_TABLE = "DROP TABLE IF EXISTS endereco CASCADE";
+    }
+    
+    public static final class Animal {
+        public static final int       COD_ANIMAL = 1;
+        public static final String    NOME = "JOE";
+        public static final String    TIPO = "CACHORRO";
+        public static final LocalDate DATA_ENCONTRO = LocalDate.parse("2005-09-15");
+        public static final String    RACA = "LHASA APSO";
+        public static final Integer   IDADE = 12;
+        public static final String    COR = "BRANCO";
+        public static final Character SEXO = 'M';
+        public static final String    LOCAL_ENCONTRO = "CASA DO LEO";
+        public static final String    RESUMO_ESPERADO = COD_ANIMAL + " - " + 
+                                                        NOME       + ". "  + 
+                                                        TIPO       + ", "  +
+                                                        RACA       + " - " +
+                                                        COR;
     }
 }
