@@ -125,7 +125,7 @@ public class TelaPDFPessoa extends javax.swing.JInternalFrame {
                             "Data de Nascimento"
                     };
 
-                    int[] larguras = {5, 16, 11, 14};
+                    int[] larguras = {6, 20, 12, 19};
 
                     pessoas.forEach(Pessoa::getDocumento);
 

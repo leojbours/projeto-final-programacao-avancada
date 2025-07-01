@@ -169,7 +169,7 @@ public class CadastroAnimal extends javax.swing.JDialog {
                             .addComponent(txtSexo)
                             .addComponent(jLabel2)
                             .addComponent(jScrollPane1))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,9 +209,9 @@ public class CadastroAnimal extends javax.swing.JDialog {
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSalvar)
-                .addGap(25, 25, 25))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();

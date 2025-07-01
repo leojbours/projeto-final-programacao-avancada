@@ -28,7 +28,7 @@ public class AnimalDAO {
 
         animal.setCodAnimal(ConexaoBD.executeUpdateReturnId(sql));
         
-        String updateResumo = "UPDATE animal set resumo_pet = " + animal.getResumoPet();
+        String updateResumo = "UPDATE animal set resumo_pet = '" + animal.getResumoPet() + "' where cod_animal = " + animal.getCodAnimal();
         
         ConexaoBD.executeUpdate(updateResumo);
     }
